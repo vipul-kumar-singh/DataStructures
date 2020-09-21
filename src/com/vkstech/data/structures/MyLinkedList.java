@@ -123,6 +123,7 @@ public class MyLinkedList {
     public void display() {
         if (Objects.isNull(head)) {
             System.out.println("List is Empty");
+            return;
         }
 
         Node start = head;
