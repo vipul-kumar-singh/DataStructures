@@ -1,4 +1,4 @@
-package com.vkstech.data.structures;
+package com.vkstech.algorithms.dataStructures;
 
 public class Main {
 
