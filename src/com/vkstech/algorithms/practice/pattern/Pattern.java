@@ -2,7 +2,7 @@ package com.vkstech.algorithms.practice.pattern;
 
 public abstract class Pattern {
 
-    public void printPattern(int n){}
+    public abstract void printPattern(int n);
     public abstract void printPatternOptimized(int n);
 
     public void testPattern(){
