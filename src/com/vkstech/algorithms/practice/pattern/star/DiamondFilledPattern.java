@@ -35,17 +35,18 @@ public class DiamondFilledPattern extends Pattern {
         final char SPACE = ' ';
         final char STAR = '*';
 
-        int levels = 2 * n - 1;
-        char[] ch = new char[levels];
+        char[] ch = new char[2 * n - 1];
         Arrays.fill(ch, SPACE);
         int mid = n - 1;
-        for (int i = 0; i < levels; i++) {
+        int leftIndex = mid;
+        int rightIndex = mid;
+        for (int i = 0; i < 2 * n; i++) {
             if (i < n) {
-                ch[mid + i] = STAR;
-                ch[mid - i] = STAR;
-            }else {
-                ch[i - mid - 1] = SPACE;
-                ch[levels - i + mid] = SPACE;
+                ch[leftIndex--] = STAR;
+                ch[rightIndex++] = STAR;
+            } else {
+                ch[++leftIndex] = SPACE;
+                ch[--rightIndex] = SPACE;
             }
             System.out.println(String.valueOf(ch));
         }

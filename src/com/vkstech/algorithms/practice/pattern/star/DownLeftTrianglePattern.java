@@ -30,7 +30,6 @@ public class DownLeftTrianglePattern extends Pattern {
     }
 
     public static void main(String[] args) {
-//        new DownLeftTrianglePattern().testPattern();
         new DownLeftTrianglePattern().testPatternOptimized();
     }
 }

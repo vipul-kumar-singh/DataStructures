@@ -46,7 +46,7 @@ public class DiamondPattern extends Pattern {
         int rightIndex = mid;
 
         for (int i = 0; i < levels; i++) {
-            if (i < n){
+            if (i < n) {
                 if (i % 2 == 0) {
                     setValue(chEven, leftIndex, rightIndex, STAR);
                     System.out.println(chEven);

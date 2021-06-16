@@ -8,8 +8,8 @@ public class DownRightTrianglePattern extends Pattern {
 
     @Override
     public void printPattern(int n) {
-        for(int i = 0; i < n; i++){
-            for(int j = n-i; j > 0; j--){
+        for (int i = 0; i < n; i++) {
+            for (int j = n - i; j > 0; j--) {
                 System.out.print("*");
             }
             System.out.println();
@@ -20,7 +20,7 @@ public class DownRightTrianglePattern extends Pattern {
     public void printPatternOptimized(int n) {
         char[] ch = new char[n];
         Arrays.fill(ch, '*');
-        for (int i = n-1; i>= 0; i--){
+        for (int i = n - 1; i >= 0; i--) {
             System.out.println(String.valueOf(ch));
             ch[i] = ' ';
         }
