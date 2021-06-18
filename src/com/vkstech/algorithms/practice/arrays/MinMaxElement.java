@@ -15,12 +15,12 @@ public class MinMaxElement {
     }
 
     public static int getMaxElement(int[] arr){
-        int min = arr[0];
+        int max = arr[0];
         for(int val : arr){
-            if (val > min)
-                min = val;
+            if (val > max)
+                max = val;
         }
-        return min;
+        return max;
     }
 
     public static void main(String[] args) {
