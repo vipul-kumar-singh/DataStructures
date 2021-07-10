@@ -1,5 +1,7 @@
 package com.vkstech.algorithms.practice.linkedList;
 
+import java.util.StringJoiner;
+
 import static com.vkstech.algorithms.practice.linkedList.LinkedList.Node;
 
 /**
@@ -22,5 +24,15 @@ public class PrintLinkedList {
             System.out.println(temp.data);
             temp = temp.next;
         }
+    }
+
+    public static void printLinkedListOneline(LinkedList linkedList) {
+        Node temp = linkedList.head;
+        StringJoiner sj = new StringJoiner(" -> ");
+        while (temp != null) {
+            sj.add(String.valueOf(temp.data));
+            temp = temp.next;
+        }
+        System.out.println(sj);
     }
 }
