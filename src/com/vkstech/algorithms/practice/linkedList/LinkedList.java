@@ -28,4 +28,18 @@ public class LinkedList {
             start.next = node;
         }
     }
+
+    protected void insertMultiple(int... data) {
+        Node temp = this.head;
+        for(int val : data){
+            Node node = new Node(val);
+            if (temp == null){
+                this.head = node;
+                temp = this.head;
+            } else {
+                temp.next = node;
+                temp = temp.next;
+            }
+        }
+    }
 }
