@@ -8,7 +8,7 @@ package com.vkstech.algorithms.practice.linkedList;
  * Eg: value[]={25,14,19,33,10,21,39,90,58,45}, The loop is 45->33,
  * Output: 7
  */
-public class LoopLength extends LinkedList {
+public class LoopLength extends LoopDetection {
 
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
