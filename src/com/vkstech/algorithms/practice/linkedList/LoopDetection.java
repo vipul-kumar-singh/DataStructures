@@ -23,7 +23,7 @@ public class LoopDetection extends LinkedList {
         System.out.println(checkLoop(linkedList));
     }
 
-    private static boolean checkLoop(LinkedList linkedList) {
+    public static boolean checkLoop(LinkedList linkedList) {
         if (linkedList == null)
             return true;
 
