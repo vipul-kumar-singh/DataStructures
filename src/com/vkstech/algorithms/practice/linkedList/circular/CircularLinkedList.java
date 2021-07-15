@@ -51,7 +51,7 @@ public class CircularLinkedList {
         do {
             sj.add(String.valueOf(temp.data));
             temp = temp.next;
-        } while (temp != this.head);
+        } while (temp != null && temp != this.head);
         System.out.println(sj);
     }
 
