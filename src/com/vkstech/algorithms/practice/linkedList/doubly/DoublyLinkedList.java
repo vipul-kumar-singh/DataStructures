@@ -68,12 +68,8 @@ public class DoublyLinkedList {
         System.out.println(stringJoiner);
     }
 
-    public static void main(String[] args) {
-        DoublyLinkedList dll = new DoublyLinkedList();
-        dll.insertAtHead(1);
-        dll.insertAtTail(2);
-        dll.insertAtHead(0);
-        dll.print();
-        dll.printReverse();
+    public boolean isEmpty(){
+        return this.head == null && this.tail == null;
     }
+
 }
