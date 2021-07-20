@@ -25,27 +25,25 @@ public class StackWithArray {
     }
 
     public void push(int data) {
-        if (isFull()) {
-            System.out.println("Stack Overflow");
-            return;
-        }
+        if (isFull())
+            throw new StackOverflowError("Stack Overflow");
 
         stackArr[headIndex++] = data;
     }
 
-    public void pop() {
-        if (isEmpty()) {
-            System.out.println("Stack Underflow");
-            return;
-        }
-        stackArr[--headIndex] = 0;
+    public int pop() {
+        if (isEmpty())
+            throw new IndexOutOfBoundsException("Stack Underflow");
+
+        int data = stackArr[--headIndex];
+        stackArr[headIndex] = 0;
+        return data;
     }
 
     public void print() {
         StringJoiner sj = new StringJoiner("->");
-        for (int i = 0; i < headIndex; i++) {
+        for (int i = 0; i < headIndex; i++)
             sj.add(String.valueOf(stackArr[i]));
-        }
         System.out.println(sj);
     }
 
