@@ -13,22 +13,23 @@ public class CheckValidBST extends BinarySearchTree {
         BinarySearchTree bst = new BinarySearchTree();
         Arrays.asList(5, 4, 6, 1, 2, 9).forEach(bst::insert);
 
-        System.out.println(isValidBst(bst.root));
+        System.out.println(isValidBst(bst));
 
-        bst.root.right.right.right = new Node(0);
-        System.out.println(isValidBst(bst.root));
+        bst.root.right.right.left = new Node(1);
+        System.out.println(isValidBst(bst));
     }
 
-    private static boolean isValidBst(Node node) {
+    public static boolean isValidBst(BinarySearchTree bst) {
+        return isBst(bst.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private static boolean isBst(Node node, int min, int max) {
         if (node == null)
             return true;
 
-        if (node.left != null && node.left.data > node.data)
+        if (node.data < min || node.data > max)
             return false;
 
-        if (node.right != null && node.right.data < node.data)
-            return false;
-
-        return isValidBst(node.left) && isValidBst(node.right);
+        return (isBst(node.left, min, node.data - 1) && isBst(node.right, node.data + 1, max));
     }
 }
