@@ -70,11 +70,19 @@ public class GraphViaMap<T> {
         adjVertices.remove(new Vertex<>(data));
     }
 
+    // uniDirectional
     public void addEdge(T uData, T vData) {
+        addEdge(uData, vData, false);
+    }
+
+    // bidirectional
+    public void addEdge(T uData, T vData, boolean biDirectional) {
         Vertex<T> u = new Vertex<>(uData);
         Vertex<T> v = new Vertex<>(vData);
         adjVertices.get(u).add(v);
-        adjVertices.get(v).add(u);
+
+        if (biDirectional)
+            adjVertices.get(v).add(u);
     }
 
     public void removeEdge(T uData, T vData) {
@@ -121,7 +129,7 @@ public class GraphViaMap<T> {
         graph.addEdge(1, 4);
         graph.addEdge(2, 3);
         graph.addEdge(2, 4);
-        graph.addEdge(3, 4);
+        graph.addEdge(3, 4, true);
 
         graph.printGraph();
     }
