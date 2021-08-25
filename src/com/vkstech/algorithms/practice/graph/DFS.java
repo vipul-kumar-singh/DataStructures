@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * BFS of graph
+ * DFS of graph
  */
-public class BFS extends GraphViaMap<Integer> {
+public class DFS extends GraphViaMap<Integer> {
 
     private static Set<Integer> set;
 
@@ -25,17 +25,17 @@ public class BFS extends GraphViaMap<Integer> {
         graph.addEdge(2, 3);
         graph.addEdge(3, 3);
 
-        printBfs(2, graph);
-        printBfs(1, graph);
+        printDfs(2, graph);
+        printDfs(1, graph);
     }
 
-    public static void printBfs(Integer data, GraphViaMap<Integer> graph) {
+    public static void printDfs(Integer data, GraphViaMap<Integer> graph) {
         set = new HashSet<>();
-        bfs(data, graph);
+        dfs(data, graph);
         System.out.println();
     }
 
-    private static void bfs(Integer data, GraphViaMap<Integer> graph) {
+    private static void dfs(Integer data, GraphViaMap<Integer> graph) {
         if (set.contains(data))
             return;
 
@@ -45,7 +45,7 @@ public class BFS extends GraphViaMap<Integer> {
         vertices.stream()
                 .map(vertex -> vertex.data)
                 .filter(v -> !set.contains(v))
-                .forEach(v -> bfs(v, graph));
+                .forEach(v -> dfs(v, graph));
     }
 
 
