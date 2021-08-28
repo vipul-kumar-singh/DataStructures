@@ -1,8 +1,6 @@
 package com.vkstech.algorithms.practice.graph;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * BFS of graph
@@ -31,11 +29,11 @@ public class BFS extends GraphViaMap<Integer> {
         Set<Integer> set = new HashSet<>();
         set.add(data);
 
-        Stack<Integer> stack = new Stack<>();
-        stack.push(data);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(data);
 
-        while (!stack.isEmpty()) {
-            Integer vData = stack.pop();
+        while (!queue.isEmpty()) {
+            Integer vData = queue.remove();
             System.out.print(vData + " ");
 
             graph.getAdjVertices(vData).stream()
@@ -43,7 +41,7 @@ public class BFS extends GraphViaMap<Integer> {
                     .filter(v -> !set.contains(v))
                     .forEach(v -> {
                         set.add(v);
-                        stack.push(v);
+                        queue.add(v);
                     });
         }
 
