@@ -1,9 +1,6 @@
 package com.vkstech.algorithms.practice.graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * https://github.com/eugenp/tutorials/tree/master/data-structures/src/main/java/com/baeldung/graph
@@ -112,6 +109,10 @@ public class GraphViaMap<T> {
         }
         sb.setLength(sb.length() - 2);
         System.out.println(sb);
+    }
+
+    public Set<Vertex<T>> getVertices() {
+        return adjVertices.keySet();
     }
 
     public static void main(String[] args) {
