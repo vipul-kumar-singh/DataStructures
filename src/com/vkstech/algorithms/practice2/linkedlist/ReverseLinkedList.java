@@ -1,22 +1,17 @@
-package com.vkstech.algorithms.practice.linkedList;
+package com.vkstech.algorithms.practice2.linkedlist;
 
-import static com.vkstech.algorithms.practice.linkedList.LinkedList.Node;
-import static com.vkstech.algorithms.practice.linkedList.PrintLinkedList.printLinkedListOneline;
+import static com.vkstech.algorithms.practice2.linkedlist.LinkedList.Node;
 
-/**
- * Reverse a linked list
- * Given a linked list of N nodes. The task is to reverse this list.
- */
-public class Reverse {
+public class ReverseLinkedList {
 
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
         for (int i = 1; i <= 10; i++)
             linkedList.insert(i);
 
-        printLinkedListOneline(linkedList);
+        System.out.println(linkedList);
         reverseLinkedList(linkedList);
-        printLinkedListOneline(linkedList);
+        System.out.println(linkedList);
     }
 
     private static void reverseLinkedList(LinkedList linkedList) {
@@ -31,6 +26,5 @@ public class Reverse {
         }
         linkedList.head = prev;
     }
-
 
 }
