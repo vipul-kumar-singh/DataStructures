@@ -1,6 +1,7 @@
 package com.vkstech.algorithms.practice2.linkedlist;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class LinkedList {
 
@@ -31,9 +32,9 @@ public class LinkedList {
 
     protected void insertMultiple(int... data) {
         Node temp = this.head;
-        for(int val : data){
+        for (int val : data) {
             Node node = new Node(val);
-            if (temp == null){
+            if (temp == null) {
                 this.head = node;
                 temp = this.head;
             } else {
@@ -41,5 +42,22 @@ public class LinkedList {
                 temp = temp.next;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        if (head == null) {
+            return null;
+        }
+
+        StringJoiner sj = new StringJoiner(",");
+        Node temp = head;
+
+        while (temp != null) {
+            sj.add(String.valueOf(temp.data));
+            temp = temp.next;
+        }
+
+        return sj.toString();
     }
 }
