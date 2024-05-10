@@ -50,7 +50,7 @@ public class LinkedList {
             return null;
         }
 
-        StringJoiner sj = new StringJoiner(",");
+        StringJoiner sj = new StringJoiner("->");
         Node temp = head;
 
         while (temp != null) {
