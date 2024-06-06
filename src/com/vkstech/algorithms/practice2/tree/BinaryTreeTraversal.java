@@ -1,5 +1,8 @@
 package com.vkstech.algorithms.practice2.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTreeTraversal extends BinaryTree {
 
     public static void preOrder(Node node) {
@@ -29,6 +32,26 @@ public class BinaryTreeTraversal extends BinaryTree {
         inOrder(node.right);
     }
 
+    public static void levelOrder(Node node) {
+        if (node == null)
+            return;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+
+        while (!q.isEmpty()) {
+
+            node = q.remove();
+            System.out.print(node.data + " ");
+
+            if (node.left != null)
+                q.add(node.left);
+
+            if (node.right != null)
+                q.add(node.right);
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -47,6 +70,9 @@ public class BinaryTreeTraversal extends BinaryTree {
         System.out.println();
 
         inOrder(bt.root);
+        System.out.println();
+
+        levelOrder(bt.root);
         System.out.println();
     }
 }
