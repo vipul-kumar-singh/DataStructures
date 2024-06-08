@@ -43,22 +43,48 @@ public class BinaryTreeOperations extends BinaryTree {
         return getLeavesCount(node.left) + getLeavesCount(node.right);
     }
 
+    public static boolean childrenSumProperty(Node node) {
+        if (node == null)
+            return true;
+
+        if (node.left == null && node.right == null)
+            return true;
+
+        int sum = 0;
+        if (node.left != null) {
+            sum += node.left.data;
+            boolean leftValue = childrenSumProperty(node.left);
+            if (!leftValue)
+                return false;
+        }
+
+        if (node.right != null) {
+            sum += node.right.data;
+            boolean rightValue = childrenSumProperty(node.right);
+            if (!rightValue)
+                return false;
+        }
+
+        return node.data == sum;
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
-        LevelOrderInsertion.insert(bt, 1);
-        LevelOrderInsertion.insert(bt, 2);
-        LevelOrderInsertion.insert(bt, 3);
-        LevelOrderInsertion.insert(bt, 4);
+        LevelOrderInsertion.insert(bt, 35);
+        LevelOrderInsertion.insert(bt, 20);
+        LevelOrderInsertion.insert(bt, 15);
+        LevelOrderInsertion.insert(bt, 15);
         LevelOrderInsertion.insert(bt, 5);
-        LevelOrderInsertion.insert(bt, 6);
-        LevelOrderInsertion.insert(bt, 7);
-        LevelOrderInsertion.insert(bt, 8);
+        LevelOrderInsertion.insert(bt, 10);
+        LevelOrderInsertion.insert(bt, 5);
 
         System.out.println("Height = " + getHeight(bt.root, 1));
         System.out.println("Height = " + getHeight(bt.root));
 
         System.out.println("Leaves Count = " + getLeavesCount(bt.root));
+
+        System.out.println("Check CSP: " + childrenSumProperty(bt.root));
     }
 
 }
