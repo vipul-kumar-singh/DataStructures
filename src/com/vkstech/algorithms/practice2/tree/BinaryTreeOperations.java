@@ -3,6 +3,7 @@ package com.vkstech.algorithms.practice2.tree;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BinaryTreeOperations extends BinaryTree {
 
@@ -201,6 +202,32 @@ public class BinaryTreeOperations extends BinaryTree {
         }
     }
 
+
+    public static int findMaxSumPath(Node parent, AtomicInteger maxSum) {
+        if (parent == null)
+            return 0;
+
+        int left = findMaxSumPath(parent.left, maxSum);
+        int right = findMaxSumPath(parent.right, maxSum);
+
+        if (parent.left == null)
+            return right + parent.data;
+
+        if (parent.right == null)
+            return left + parent.data;
+
+        int cur_sum = left + right + parent.data;
+        maxSum.set(Math.max(cur_sum, maxSum.get()));
+
+        return Math.max(left, right) + parent.data;
+    }
+
+    public static int findMaxSumPath(BinaryTree binaryTree) {
+        AtomicInteger maxSum = new AtomicInteger(Integer.MIN_VALUE);
+        findMaxSumPath(binaryTree.root, maxSum);
+        return maxSum.get();
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -233,6 +260,9 @@ public class BinaryTreeOperations extends BinaryTree {
         printLeftView(bt.root);
         System.out.println("\nRight View: ");
         printRightView(bt.root);
+
+
+        System.out.println("\nMax Sum : " + findMaxSumPath(bt));
     }
 
 }
