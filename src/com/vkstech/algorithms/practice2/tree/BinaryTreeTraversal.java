@@ -2,6 +2,7 @@ package com.vkstech.algorithms.practice2.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.StringJoiner;
 
 public class BinaryTreeTraversal extends BinaryTree {
 
@@ -52,6 +53,43 @@ public class BinaryTreeTraversal extends BinaryTree {
         }
     }
 
+    public static void zigZagLevelOrder(Node node) {
+        if (node == null)
+            return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        int level = 1;
+
+        StringJoiner sj = new StringJoiner("");
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 1; i <= n; i++) {
+                Node temp = queue.remove();
+
+                sb.append(temp.data);
+
+                if (temp.left != null)
+                    queue.add(temp.left);
+
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+
+            if (level % 2 == 0)
+                sj.add(sb.reverse());
+            else
+                sj.add(sb);
+
+            level++;
+        }
+
+        System.out.println(sj);
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -73,6 +111,9 @@ public class BinaryTreeTraversal extends BinaryTree {
         System.out.println();
 
         levelOrder(bt.root);
+        System.out.println();
+
+        zigZagLevelOrder(bt.root);
         System.out.println();
     }
 }
