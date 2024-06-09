@@ -1,5 +1,8 @@
 package com.vkstech.algorithms.practice2.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTreeOperations extends BinaryTree {
 
     public static int getHeight(Node node, int n) {
@@ -68,6 +71,32 @@ public class BinaryTreeOperations extends BinaryTree {
         return node.data == sum;
     }
 
+
+    private static Node convertToMirror(Node node) {
+        if (node == null)
+            return null;
+
+        Node temp = node;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(temp);
+
+        while (!queue.isEmpty()) {
+            temp = queue.remove();
+
+            Node swap = temp.left;
+            temp.left = temp.right;
+            temp.right = swap;
+
+            if (temp.left != null)
+                queue.add(temp.left);
+
+            if (temp.right != null)
+                queue.add(temp.right);
+        }
+
+        return node;
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -85,6 +114,13 @@ public class BinaryTreeOperations extends BinaryTree {
         System.out.println("Leaves Count = " + getLeavesCount(bt.root));
 
         System.out.println("Check CSP: " + childrenSumProperty(bt.root));
+
+        System.out.println("\nInOrder before mirroring: ");
+        BinaryTreeTraversal.inOrder(bt.root);
+        convertToMirror(bt.root);
+        System.out.println("\nInorder after miroring");
+        BinaryTreeTraversal.inOrder(bt.root);
+
     }
 
 }
