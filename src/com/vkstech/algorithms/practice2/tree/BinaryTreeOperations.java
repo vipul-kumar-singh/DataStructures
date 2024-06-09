@@ -136,6 +136,21 @@ public class BinaryTreeOperations extends BinaryTree {
         return false;
     }
 
+    public static int diameter(Node node) {
+        if (node == null)
+            return -1;
+
+        int sum = 1;
+
+        if (node.left != null)
+            sum += getHeight(node.left);
+
+        if (node.right != null)
+            sum += getHeight(node.right);
+
+        return sum;
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -157,10 +172,12 @@ public class BinaryTreeOperations extends BinaryTree {
         System.out.println("\nInOrder before mirroring: ");
         BinaryTreeTraversal.inOrder(bt.root);
         convertToMirror(bt.root);
-        System.out.println("\nInorder after miroring");
+        System.out.println("\nInorder after mirroring");
         BinaryTreeTraversal.inOrder(bt.root);
 
         System.out.println("\nLCA: " + lowestCommonAncestor(bt.root, 10, 4));
+
+        System.out.println("Diameter: " + diameter(bt.root));
 
     }
 
