@@ -1,6 +1,7 @@
 package com.vkstech.algorithms.practice2.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTreeOperations extends BinaryTree {
@@ -97,16 +98,54 @@ public class BinaryTreeOperations extends BinaryTree {
         return node;
     }
 
+    public static int lowestCommonAncestor(Node node, int n1, int n2) {
+        if (node == null)
+            return -1;
+
+        List<Integer> n1Path = new LinkedList<>();
+        List<Integer> n2Path = new LinkedList<>();
+
+        getPath(node, n1, n1Path);
+        getPath(node, n2, n2Path);
+
+        int minLength = Math.min(n1Path.size(), n2Path.size());
+
+        int previous = -1;
+        for (int i = 0; i < minLength; i++) {
+            if (!n1Path.get(i).equals(n2Path.get(i)))
+                return previous;
+            previous = n1Path.get(i);
+        }
+
+        return previous;
+    }
+
+    private static boolean getPath(Node node, int n, List<Integer> path) {
+        if (node == null)
+            return false;
+
+        path.add(node.data);
+
+        if (node.data == n ||
+                getPath(node.left, n, path) ||
+                getPath(node.right, n, path)) {
+            return true;
+        }
+
+        path.remove(path.size() - 1);
+        return false;
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
         LevelOrderInsertion.insert(bt, 35);
-        LevelOrderInsertion.insert(bt, 20);
+        LevelOrderInsertion.insert(bt, 19);
+        LevelOrderInsertion.insert(bt, 16);
         LevelOrderInsertion.insert(bt, 15);
-        LevelOrderInsertion.insert(bt, 15);
-        LevelOrderInsertion.insert(bt, 5);
+        LevelOrderInsertion.insert(bt, 4);
         LevelOrderInsertion.insert(bt, 10);
-        LevelOrderInsertion.insert(bt, 5);
+        LevelOrderInsertion.insert(bt, 6);
 
         System.out.println("Height = " + getHeight(bt.root, 1));
         System.out.println("Height = " + getHeight(bt.root));
@@ -120,6 +159,8 @@ public class BinaryTreeOperations extends BinaryTree {
         convertToMirror(bt.root);
         System.out.println("\nInorder after miroring");
         BinaryTreeTraversal.inOrder(bt.root);
+
+        System.out.println("\nLCA: " + lowestCommonAncestor(bt.root, 10, 4));
 
     }
 
