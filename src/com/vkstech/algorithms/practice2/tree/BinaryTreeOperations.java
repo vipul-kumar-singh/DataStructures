@@ -151,6 +151,56 @@ public class BinaryTreeOperations extends BinaryTree {
         return sum;
     }
 
+    public static void printLeftView(Node node) {
+        if (node == null)
+            return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+
+            for (int i = 1; i <= n; i++) {
+                Node temp = queue.remove();
+
+                if (i == 1)
+                    System.out.print(temp.data + " ");
+
+                if (temp.left != null)
+                    queue.add(temp.left);
+
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+        }
+    }
+
+    public static void printRightView(Node node) {
+        if (node == null)
+            return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+
+            for (int i = 1; i <= n; i++) {
+                Node temp = queue.remove();
+
+                if (i == n)
+                    System.out.print(temp.data + " ");
+
+                if (temp.left != null)
+                    queue.add(temp.left);
+
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
 
@@ -171,14 +221,18 @@ public class BinaryTreeOperations extends BinaryTree {
 
         System.out.println("\nInOrder before mirroring: ");
         BinaryTreeTraversal.inOrder(bt.root);
-        convertToMirror(bt.root);
-        System.out.println("\nInorder after mirroring");
-        BinaryTreeTraversal.inOrder(bt.root);
+//        convertToMirror(bt.root);
+//        System.out.println("\nInorder after mirroring");
+//        BinaryTreeTraversal.inOrder(bt.root);
 
         System.out.println("\nLCA: " + lowestCommonAncestor(bt.root, 10, 4));
 
         System.out.println("Diameter: " + diameter(bt.root));
 
+        System.out.println("Left View: ");
+        printLeftView(bt.root);
+        System.out.println("\nRight View: ");
+        printRightView(bt.root);
     }
 
 }
