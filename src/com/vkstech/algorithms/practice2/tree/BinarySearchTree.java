@@ -21,6 +21,17 @@ public class BinarySearchTree extends BinaryTree {
 
     }
 
+    public static boolean isPresent(Node node, int data) {
+        if (node == null)
+            return false;
+
+        if (node.data == data)
+            return true;
+
+        return isPresent(data < node.data ? node.left : node.right, data);
+
+    }
+
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(3);
@@ -29,6 +40,8 @@ public class BinarySearchTree extends BinaryTree {
         bst.insert(4);
 
         BinaryTreeTraversal.inOrder(bst.root);
-
+        System.out.println();
+        System.out.println(isPresent(bst.root, 2));
+        System.out.println(isPresent(bst.root, 5));
     }
 }
