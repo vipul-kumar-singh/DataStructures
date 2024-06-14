@@ -38,6 +38,8 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         int[] preSuc = findPreSuc(bst.root, 4);
         System.out.println("Predecessor: " + preSuc[0]);
         System.out.println("Successor: " + preSuc[1]);
+
+        System.out.println("Closest neighbour: " + closestNeighbour(bst.root, 7));
     }
 
     public static int getMin(Node node) {
@@ -129,6 +131,26 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         }
 
         return arr;
+    }
+
+    public static int closestNeighbour(Node node, int key) {
+        if (node == null)
+            return -1;
+
+        if (node.data == key)
+            return node.data;
+
+        if (key < node.data && node.left != null) {
+            int n = closestNeighbour(node.left, key);
+            return Math.min(node.data, n);
+        }
+
+        if (key > node.data && node.right != null) {
+            int n = closestNeighbour(node.right, key);
+            return Math.max(node.data, n);
+        }
+
+        return key < node.data ? -1 : node.data;
     }
 
 }
