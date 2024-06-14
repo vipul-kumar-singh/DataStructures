@@ -14,9 +14,13 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
 
         System.out.println(getMin(bst.root));
 
+        int[] inOrder = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        BinarySearchTree bst1 = getBstFromArray(inOrder);
+        BinaryTreeTraversal.inOrder(bst1.root);
+        System.out.println();
     }
 
-    private static int getMin(Node node) {
+    public static int getMin(Node node) {
         if (node == null)
             return -1;
 
@@ -24,6 +28,23 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
             return node.data;
 
         return getMin(node.left);
+    }
+
+    public static BinarySearchTree getBstFromArray(int[] arr) {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.root = getBstFromArray(arr, 0, arr.length);
+        return bst;
+    }
+
+    private static Node getBstFromArray(int[] arr, int start, int end) {
+        if (start >= end)
+            return null;
+
+        int mid = (start + end) / 2;
+        Node node = new Node(arr[mid]);
+        node.left = getBstFromArray(arr, start, mid);
+        node.right = getBstFromArray(arr, mid + 1, end);
+        return node;
     }
 
 }
