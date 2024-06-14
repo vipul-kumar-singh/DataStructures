@@ -18,6 +18,8 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         BinarySearchTree bst1 = getBstFromArray(inOrder);
         BinaryTreeTraversal.inOrder(bst1.root);
         System.out.println();
+
+        System.out.println("Nodes in range: " + countNodesInRange(bst.root, 8, 18));
     }
 
     public static int getMin(Node node) {
@@ -45,6 +47,17 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         node.left = getBstFromArray(arr, start, mid);
         node.right = getBstFromArray(arr, mid + 1, end);
         return node;
+    }
+
+    private static int countNodesInRange(Node node, int min, int max) {
+        if (node == null)
+            return 0;
+
+        int sum = 0;
+        if (node.data >= min && node.data <= max)
+            sum++;
+
+        return sum + countNodesInRange(node.left, min, max) + countNodesInRange(node.right, min, max);
     }
 
 }
