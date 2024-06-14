@@ -35,6 +35,9 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         BinaryTreeTraversal.inOrder(bst2.root);
         System.out.println();
 
+        int[] preSuc = findPreSuc(bst.root, 4);
+        System.out.println("Predecessor: " + preSuc[0]);
+        System.out.println("Successor: " + preSuc[1]);
     }
 
     public static int getMin(Node node) {
@@ -79,7 +82,7 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         addAllGreaterValues(node, new AtomicInteger());
     }
 
-    public static void addAllGreaterValues(Node node, AtomicInteger sum) {
+    private static void addAllGreaterValues(Node node, AtomicInteger sum) {
         if (node == null)
             return;
 
@@ -89,6 +92,43 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         node.data = sum.get();
 
         addAllGreaterValues(node.left, sum);
+    }
+
+    public static int[] findPreSuc(Node node, int key) {
+        int[] arr = {-1, -1};
+        arr = findPreSuc(node, key, arr);
+        return arr;
+    }
+
+    private static int[] findPreSuc(Node node, int key, int[] arr) {
+        if (node == null)
+            return arr;
+
+        if (key < node.data) {
+            arr[1] = node.data;
+            return findPreSuc(node.left, key, arr);
+        }
+
+        if (key > node.data) {
+            arr[0] = node.data;
+            return findPreSuc(node.right, key, arr);
+        }
+
+        if (node.left != null) {
+            Node tmp = node.left;
+            while (tmp.right != null)
+                tmp = tmp.right;
+            arr[0] = tmp.data;
+        }
+
+        if (node.right != null) {
+            Node tmp = node.right;
+            while (tmp.left != null)
+                tmp = tmp.left;
+            arr[1] = tmp.data;
+        }
+
+        return arr;
     }
 
 }
