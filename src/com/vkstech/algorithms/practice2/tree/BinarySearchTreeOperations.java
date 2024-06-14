@@ -1,5 +1,7 @@
 package com.vkstech.algorithms.practice2.tree;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class BinarySearchTreeOperations extends BinarySearchTree {
 
     public static void main(String[] args) {
@@ -20,6 +22,19 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         System.out.println();
 
         System.out.println("Nodes in range: " + countNodesInRange(bst.root, 8, 18));
+
+        BinarySearchTree bst2 = new BinarySearchTree();
+        bst2.insert(50);
+        bst2.insert(30);
+        bst2.insert(70);
+        bst2.insert(20);
+        bst2.insert(40);
+        bst2.insert(60);
+        bst2.insert(80);
+        addAllGreaterValues(bst2.root);
+        BinaryTreeTraversal.inOrder(bst2.root);
+        System.out.println();
+
     }
 
     public static int getMin(Node node) {
@@ -49,7 +64,7 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         return node;
     }
 
-    private static int countNodesInRange(Node node, int min, int max) {
+    public static int countNodesInRange(Node node, int min, int max) {
         if (node == null)
             return 0;
 
@@ -58,6 +73,22 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
             sum++;
 
         return sum + countNodesInRange(node.left, min, max) + countNodesInRange(node.right, min, max);
+    }
+
+    public static void addAllGreaterValues(Node node) {
+        addAllGreaterValues(node, new AtomicInteger());
+    }
+
+    public static void addAllGreaterValues(Node node, AtomicInteger sum) {
+        if (node == null)
+            return;
+
+        addAllGreaterValues(node.right, sum);
+
+        sum.set(sum.get() + node.data);
+        node.data = sum.get();
+
+        addAllGreaterValues(node.left, sum);
     }
 
 }
