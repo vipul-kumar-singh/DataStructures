@@ -58,6 +58,12 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         System.out.println(isValidBst(bst2.root));
         System.out.println(isValidBst(bst3.root));
 
+        int[] preOrderArr = {15, 4, 10, 6, 19, 16, 35};
+        BinarySearchTree bst4 = getBstFromPreorder(preOrderArr);
+        BinaryTreeTraversal.preOrder(bst4.root);
+        System.out.println();
+        BinaryTreeTraversal.inOrder(bst4.root);
+        System.out.println();
     }
 
     public static int getMin(Node node) {
@@ -244,6 +250,30 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         }
 
         return isValidBst(node.left) && isValidBst(node.right);
+    }
+
+    public static BinarySearchTree getBstFromPreorder(int[] preOrder) {
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.root = getBstFromPreOrder(preOrder, 0, preOrder.length);
+        return bst;
+    }
+
+    private static Node getBstFromPreOrder(int[] arr, int start, int end) {
+        if (start == end)
+            return null;
+
+        Node node = new Node(arr[start]);
+        int i = start + 1;
+
+        if (i < arr.length && node.data > arr[start + 1]) {
+            while (i < arr.length && node.data > arr[i]) {
+                i++;
+            }
+        }
+
+        node.left = getBstFromPreOrder(arr, start + 1, i);
+        node.right = getBstFromPreOrder(arr, i, end);
+        return node;
     }
 
 }
