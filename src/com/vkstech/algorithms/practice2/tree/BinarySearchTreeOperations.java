@@ -178,9 +178,7 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         while (!inOrderQueue.isEmpty())
             inOrderArray[i++] = inOrderQueue.remove();
 
-        BinarySearchTree balBst = new BinarySearchTree();
-        balBst.root = getBstFromArray(inOrderArray, 0, inOrderArray.length);
-        return balBst;
+        return getBstFromArray(inOrderArray);
     }
 
     private static Queue<Integer> getInorderFromBst(Node node, Queue<Integer> inOrderQueue) {
