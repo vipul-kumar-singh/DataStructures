@@ -1,5 +1,7 @@
 package com.vkstech.algorithms.practice2.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BinarySearchTreeOperations extends BinarySearchTree {
@@ -40,6 +42,10 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         System.out.println("Successor: " + preSuc[1]);
 
         System.out.println("Closest neighbour: " + closestNeighbour(bst.root, 7));
+
+        BinarySearchTree bst3 = bstToBalancedBst(bst);
+        BinaryTreeTraversal.inOrder(bst3.root);
+        System.out.println();
     }
 
     public static int getMin(Node node) {
@@ -151,6 +157,29 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         }
 
         return key < node.data ? -1 : node.data;
+    }
+
+    public static BinarySearchTree bstToBalancedBst(BinarySearchTree bst) {
+        Queue<Integer> inOrderQueue = getInorderFromBst(bst.root, new LinkedList<>());
+        int[] inOrderArray = new int[inOrderQueue.size()];
+        int i = 0;
+        while (!inOrderQueue.isEmpty())
+            inOrderArray[i++] = inOrderQueue.remove();
+
+        BinarySearchTree balBst = new BinarySearchTree();
+        balBst.root = getBstFromArray(inOrderArray, 0, inOrderArray.length);
+        return balBst;
+    }
+
+    private static Queue<Integer> getInorderFromBst(Node node, Queue<Integer> inOrderQueue) {
+        if (node == null)
+            return null;
+
+        getInorderFromBst(node.left, inOrderQueue);
+        inOrderQueue.add(node.data);
+        getInorderFromBst(node.right, inOrderQueue);
+
+        return inOrderQueue;
     }
 
 }
