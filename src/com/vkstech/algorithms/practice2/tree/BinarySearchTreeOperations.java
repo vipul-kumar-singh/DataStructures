@@ -52,6 +52,12 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         findPairSum(bst, 34);
         findPairSum(bst, 10);
         findPairSum(bst, 11);
+
+        System.out.println(isValidBst(bst.root));
+        System.out.println(isValidBst(bst1.root));
+        System.out.println(isValidBst(bst2.root));
+        System.out.println(isValidBst(bst3.root));
+
     }
 
     public static int getMin(Node node) {
@@ -228,6 +234,18 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
             System.out.println("There's no pair that sums up to " + sum + ".");
         else
             System.out.println("Nodes with value " + num1 + " and " + num2 + " sum up to " + sum + ".");
+    }
+
+    public static boolean isValidBst(Node node) {
+        if (node == null)
+            return true;
+
+        if ((node.left != null && node.left.data > node.data)
+                || (node.right != null && node.right.data < node.data)) {
+            return false;
+        }
+
+        return isValidBst(node.left) && isValidBst(node.right);
     }
 
 }
