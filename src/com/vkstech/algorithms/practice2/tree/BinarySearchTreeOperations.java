@@ -1,7 +1,9 @@
 package com.vkstech.algorithms.practice2.tree;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BinarySearchTreeOperations extends BinarySearchTree {
@@ -46,6 +48,10 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         BinarySearchTree bst3 = bstToBalancedBst(bst);
         BinaryTreeTraversal.inOrder(bst3.root);
         System.out.println();
+
+        findPairSum(bst, 34);
+        findPairSum(bst, 10);
+        findPairSum(bst, 11);
     }
 
     public static int getMin(Node node) {
@@ -180,6 +186,48 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         getInorderFromBst(node.right, inOrderQueue);
 
         return inOrderQueue;
+    }
+
+    public static void findPairSum(BinarySearchTree bst, int sum) {
+        if (bst == null || bst.root == null)
+            return;
+
+        Set<Integer> set = new HashSet<>();
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(bst.root);
+
+        int num1 = -1;
+        int num2 = -1;
+
+        while (!queue.isEmpty()) {
+            Node node = queue.remove();
+
+            if (set.contains(node.data)) {
+                num1 = node.data;
+                num2 = sum - node.data;
+                break;
+            }
+
+            if (node.data > sum) {
+                queue.add(node.left);
+                continue;
+            }
+
+            int diff = sum - node.data;
+            set.add(diff);
+
+            if (node.left != null)
+                queue.add(node.left);
+
+            if (node.right != null)
+                queue.add(node.right);
+        }
+
+        if (num1 == -1 && num2 == -1)
+            System.out.println("There's no pair that sums up to " + sum + ".");
+        else
+            System.out.println("Nodes with value " + num1 + " and " + num2 + " sum up to " + sum + ".");
     }
 
 }
