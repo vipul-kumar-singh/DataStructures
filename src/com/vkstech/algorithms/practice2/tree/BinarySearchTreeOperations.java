@@ -1,9 +1,6 @@
 package com.vkstech.algorithms.practice2.tree;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BinarySearchTreeOperations extends BinarySearchTree {
@@ -64,6 +61,8 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         System.out.println();
         BinaryTreeTraversal.inOrder(bst4.root);
         System.out.println();
+
+        printLeafNodesFromPreOrder(preOrderArr);
     }
 
     public static int getMin(Node node) {
@@ -274,6 +273,34 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         node.left = getBstFromPreOrder(arr, start + 1, i);
         node.right = getBstFromPreOrder(arr, i, end);
         return node;
+    }
+
+    public static void printLeafNodesFromPreOrder(int[] preorder) {
+        List<Integer> list = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0, j = 1; j < preorder.length; i++, j++) {
+            boolean found = false;
+
+            if (preorder[i] > preorder[j]) {
+                stack.push(preorder[i]);
+            } else {
+                while (!stack.isEmpty()) {
+                    if (preorder[j] > stack.peek()) {
+                        stack.pop();
+                        found = true;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            if (found)
+                list.add(preorder[i]);
+        }
+
+        list.forEach(obj -> System.out.print(obj + " "));
+        System.out.println();
     }
 
 }
