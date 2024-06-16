@@ -63,6 +63,23 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
         System.out.println();
 
         printLeafNodesFromPreOrder(preOrderArr);
+
+        BinarySearchTree bst5 = new BinarySearchTree();
+        bst5.insert(3);
+        bst5.insert(6);
+        bst5.insert(2);
+        bst5.insert(4);
+
+        BinarySearchTree bst6 = new BinarySearchTree();
+        bst6.insert(2);
+        bst6.insert(1);
+        bst6.insert(3);
+        bst6.insert(7);
+        bst6.insert(6);
+
+        int[] arr = mergeBst(bst5, bst6);
+        Arrays.stream(arr).forEach(i -> System.out.print(i + " "));
+        System.out.println();
     }
 
     public static int getMin(Node node) {
@@ -301,6 +318,35 @@ public class BinarySearchTreeOperations extends BinarySearchTree {
 
         list.forEach(obj -> System.out.print(obj + " "));
         System.out.println();
+    }
+
+    public static int[] mergeBst(BinarySearchTree bst1, BinarySearchTree bst2) {
+        Queue<Integer> queue1 = getInorderFromBst(bst1.root, new LinkedList<>());
+        Queue<Integer> queue2 = getInorderFromBst(bst2.root, new LinkedList<>());
+
+        int[] arr = new int[queue1.size() + queue2.size()];
+        int i = 0;
+
+        while (!queue1.isEmpty() && !queue2.isEmpty()) {
+            int n1 = queue1.peek();
+            int n2 = queue2.peek();
+
+            if (n1 <= n2) {
+                arr[i++] = queue1.remove();
+            } else {
+                arr[i++] = queue2.remove();
+            }
+        }
+
+        while (!queue1.isEmpty()) {
+            arr[i++] = queue1.remove();
+        }
+
+        while (!queue2.isEmpty()) {
+            arr[i++] = queue2.remove();
+        }
+
+        return arr;
     }
 
 }
