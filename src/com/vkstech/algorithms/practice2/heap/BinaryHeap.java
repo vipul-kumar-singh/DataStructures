@@ -72,11 +72,76 @@ public class BinaryHeap {
         node2.data = temp;
     }
 
+    public void delete() {
+        Node temp = root;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(temp);
+
+        while (!queue.isEmpty()) {
+            temp = queue.remove();
+
+            if (temp.left != null) {
+                queue.add(temp.left);
+            }
+
+            if (temp.right != null) {
+                queue.add(temp.right);
+            }
+        }
+
+        swap(root, temp);
+        deleteNode(temp);
+        heapifyDown(root);
+    }
+
+    private void deleteNode(Node node) {
+        if (node == root) {
+            root = null;
+            return;
+        }
+
+        if (node == node.parent.left) {
+            node.parent.left = null;
+            node.parent = null;
+            return;
+        }
+
+        if (node == node.parent.right) {
+            node.parent.right = null;
+            node.parent = null;
+        }
+    }
+
+    private void heapifyDown(Node node) {
+        if (node == null)
+            return;
+
+        Node swapNode;
+
+        if (node.left != null && node.right != null) {
+            swapNode = comparator.compare(node.left.data, node.right.data) > 0 ? node.left : node.right;
+        } else if (node.left != null && comparator.compare(node.left.data, node.data) > 0) {
+            swapNode = node.left;
+        } else if (node.right != null && comparator.compare(node.right.data, node.data) > 0) {
+            swapNode = node.right;
+        } else {
+            return;
+        }
+
+        swap(node, swapNode);
+        heapifyDown(swapNode);
+    }
+
     public static void main(String[] args) {
         BinaryHeap binaryHeap = new BinaryHeap((a, b) -> a - b);
         binaryHeap.insert(3);
         binaryHeap.insert(4);
         binaryHeap.insert(1);
         binaryHeap.insert(5);
+
+        binaryHeap.delete();
+        binaryHeap.delete();
+        binaryHeap.delete();
+        binaryHeap.delete();
     }
 }
