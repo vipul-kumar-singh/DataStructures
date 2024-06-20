@@ -85,6 +85,10 @@ public class MinHeapUsingArray {
         }
     }
 
+    public int getHeight() {
+        return (int) Math.ceil(Math.log(size + 1) / Math.log(2)) - 1;
+    }
+
     public static void main(String[] args) {
         MinHeapUsingArray minHeap = new MinHeapUsingArray(15);
         minHeap.insert(5);
