@@ -1,6 +1,7 @@
 package com.vkstech.algorithms.practice2.array;
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArrayOperationsLevel2 {
 
@@ -24,10 +25,22 @@ public class ArrayOperationsLevel2 {
         }
     }
 
+    private static int findMissingNumber(int[] arr, int n) {
+        int totalSum = n * (n + 1) / 2;
+        AtomicInteger sum = new AtomicInteger();
+        Arrays.stream(arr).forEach(sum::addAndGet);
+        return totalSum - sum.get();
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
         cyclicRotateArray(arr1, 2);
         System.out.println(Arrays.toString(arr1));
+
+        int[] arr2 = {1, 2, 4, 6, 3, 7, 8};
+        int n = 8;
+        System.out.println(findMissingNumber(arr2, n));
     }
+
 }
