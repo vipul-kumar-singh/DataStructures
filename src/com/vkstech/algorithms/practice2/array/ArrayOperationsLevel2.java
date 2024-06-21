@@ -1,6 +1,8 @@
 package com.vkstech.algorithms.practice2.array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArrayOperationsLevel2 {
@@ -32,6 +34,26 @@ public class ArrayOperationsLevel2 {
         return totalSum - sum.get();
     }
 
+    private static int countPairsWithSum(int[] arr, int sum) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+
+
+        for (int num : arr) {
+            if (map.containsKey(sum - num)) {
+                count += map.get(sum - num);
+            }
+
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -41,6 +63,10 @@ public class ArrayOperationsLevel2 {
         int[] arr2 = {1, 2, 4, 6, 3, 7, 8};
         int n = 8;
         System.out.println(findMissingNumber(arr2, n));
+
+        int[] arr3 = {1, 1, 1, 1};
+        int sum = 2;
+        System.out.println(countPairsWithSum(arr3, sum));
     }
 
 }
