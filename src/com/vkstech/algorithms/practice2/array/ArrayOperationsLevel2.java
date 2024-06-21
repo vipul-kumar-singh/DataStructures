@@ -70,6 +70,24 @@ public class ArrayOperationsLevel2 {
         System.out.println();
     }
 
+    public static void findCommonELements(int[]... arrs) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] arr : arrs) {
+            for (int num : arr) {
+                if (map.containsKey(num))
+                    map.put(num, map.get(num) + 1);
+                else
+                    map.put(num, 1);
+            }
+        }
+
+        map.entrySet().stream().filter(entry -> entry.getValue() == arrs.length)
+                .forEach(entry -> System.out.print(entry.getKey() + " "));
+        System.out.println();
+    }
+
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -86,6 +104,11 @@ public class ArrayOperationsLevel2 {
 
         int[] arr4 = {1, 2, 3, 6, 3, 6, 1};
         findDuplicates(arr4);
+
+        int[] arr5 = {1, 5, 10, 20, 40, 80};
+        int[] arr6 = {6, 7, 10, 20, 80, 100};
+        int[] arr7 = {3, 4, 6, 7, 15, 20, 30, 70, 80, 120};
+        findCommonELements(arr5, arr6, arr7);
     }
 
 }
