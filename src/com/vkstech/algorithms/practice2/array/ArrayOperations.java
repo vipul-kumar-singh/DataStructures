@@ -1,6 +1,6 @@
 package com.vkstech.algorithms.practice2.array;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ArrayOperations {
 
@@ -139,6 +139,44 @@ public class ArrayOperations {
         arr[pos2] = temp;
     }
 
+    public static Integer[] getUnion(int[] arr1, int[] arr2) {
+        Set<Integer> union = new TreeSet<>();
+
+        for (int num : arr1) {
+            union.add(num);
+        }
+
+        for (int num : arr2) {
+            union.add(num);
+        }
+
+        return union.toArray(new Integer[0]);
+    }
+
+    public static Integer[] getIntersection(int[] arr1, int[] arr2) {
+        List<Integer> intersection = new ArrayList<>();
+
+        int i = 0;
+        int j = 0;
+
+        while (i != arr1.length && j != arr2.length) {
+            int n1 = arr1[i];
+            int n2 = arr2[j];
+
+            if (n1 == n2) {
+                intersection.add(n1);
+                i++;
+                j++;
+            } else if (n1 < n2) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        return intersection.toArray(new Integer[0]);
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
@@ -159,5 +197,13 @@ public class ArrayOperations {
         int[] arr3 = {1, 2, -3, 4, 5, 6, -7, 8, -9};
         shiftNegativeAndPositive(arr3);
         System.out.println(Arrays.toString(arr3));
+
+
+        int[] arr4 = {1, 3, 4, 5, 7};
+        int[] arr5 = {2, 3, 5, 6};
+        Integer[] union = getUnion(arr4, arr5);
+        Integer[] intersection = getIntersection(arr4, arr5);
+        System.out.println(Arrays.toString(union));
+        System.out.println(Arrays.toString(intersection));
     }
 }
