@@ -49,7 +49,6 @@ public class ArrayOperations {
             arr[i] = arr[n - i - 1];
             arr[n - 1 - i] = temp;
         }
-
     }
 
     public static int kthSmallest(int[] nums, int k) {
@@ -83,6 +82,15 @@ public class ArrayOperations {
         return cnt;
     }
 
+    public static int countOccurrence(int[] arr, int n) {
+        int count = 0;
+        for (int num : arr) {
+            if (num == n)
+                count++;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
@@ -93,5 +101,8 @@ public class ArrayOperations {
         System.out.println(Arrays.toString(arr));
 
         System.out.println("Kth smallest element is " + kthSmallest(arr, 5));
+
+        int[] arr1 = {1, 1, 2, 2, 2, 2, 3};
+        System.out.println(countOccurrence(arr1, 2));
     }
 }
