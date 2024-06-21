@@ -129,6 +129,42 @@ public class ArrayOperationsLevel2 {
         return count;
     }
 
+    public static void reArrangeAltPositiveNegative(int[] arr) {
+        if (arr.length <= 1)
+            return;
+
+        int left = 0;
+        int right = 1;
+
+        while (right < arr.length) {
+            if (arr[left] >= 0 && arr[right] < 0
+                    || arr[left] < 0 && arr[right] >= 0) {
+                rotateSubArray(arr, left, right);
+                left++;
+                right++;
+                continue;
+            }
+
+            if (arr[right] >= 0 || left == right)
+                right++;
+
+            if ((arr[left] < 0 && left % 2 == 0) || (arr[left] >= 0 && left % 2 != 0))
+                left++;
+        }
+    }
+
+
+    private static void rotateSubArray(int[] arr, int left, int right) {
+        int temp = arr[right];
+
+        int i = right;
+        while (i > left) {
+            arr[i] = arr[i - 1];
+            i--;
+        }
+
+        arr[i] = temp;
+    }
 
     public static void main(String[] args) {
 
@@ -157,6 +193,10 @@ public class ArrayOperationsLevel2 {
 
         int[] arr9 = {1, 0, 0, 1, 1, 0, 0, 1};
         System.out.println(countSubArrayWithEqualZeroAndOne(arr9));
+
+        int[] arr10 = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
+        reArrangeAltPositiveNegative(arr10);
+        System.out.println(Arrays.toString(arr10));
     }
 
 }
