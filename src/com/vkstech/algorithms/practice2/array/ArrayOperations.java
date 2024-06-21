@@ -52,6 +52,37 @@ public class ArrayOperations {
 
     }
 
+    public static int kthSmallest(int[] nums, int k) {
+        int low = Integer.MAX_VALUE;
+        int high = Integer.MIN_VALUE;
+
+        for (int num : nums) {
+            low = Math.min(low, num);
+            high = Math.max(high, num);
+        }
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            if (count(nums, mid) < k)
+                low = mid + 1;
+            else
+                high = mid;
+        }
+
+        return low;
+    }
+
+    private static int count(int[] nums, int mid) {
+        int cnt = 0;
+
+        for (int num : nums)
+            if (num <= mid)
+                cnt++;
+
+        return cnt;
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
@@ -60,5 +91,7 @@ public class ArrayOperations {
 
         reverseArray(arr);
         System.out.println(Arrays.toString(arr));
+
+        System.out.println("Kth smallest element is " + kthSmallest(arr, 5));
     }
 }
