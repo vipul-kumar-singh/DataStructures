@@ -1,5 +1,7 @@
 package com.vkstech.algorithms.practice2.array;
 
+import java.util.Arrays;
+
 public class ArrayOperations {
 
     public static int findPeakElement(int[] arr) {
@@ -37,10 +39,26 @@ public class ArrayOperations {
         return min;
     }
 
+    public static void reverseArray(int[] arr) {
+        if (arr.length <= 1)
+            return;
+
+        int n = arr.length;
+        for (int i = 0; i < n / 2; i++) {
+            int temp = arr[i];
+            arr[i] = arr[n - i - 1];
+            arr[n - 1 - i] = temp;
+        }
+
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
 
         System.out.println(findMinElement(arr));
+
+        reverseArray(arr);
+        System.out.println(Arrays.toString(arr));
     }
 }
