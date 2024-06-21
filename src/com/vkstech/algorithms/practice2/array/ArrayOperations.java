@@ -91,6 +91,26 @@ public class ArrayOperations {
         return count;
     }
 
+    public static void sort012(int[] arr) {
+        int[] arr012 = {0, 0, 0};
+
+        for (int num : arr) {
+            arr012[num]++;
+        }
+
+        int i = 0;
+        for (int j = 0; j < arr012.length; j++) {
+            int n = arr012[j];
+            while (n != 0) {
+                arr[i] = j;
+                n--;
+                i++;
+            }
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
@@ -104,5 +124,8 @@ public class ArrayOperations {
 
         int[] arr1 = {1, 1, 2, 2, 2, 2, 3};
         System.out.println(countOccurrence(arr1, 2));
+
+        int[] arr2 = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
+        sort012(arr2);
     }
 }
