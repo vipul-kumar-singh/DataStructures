@@ -111,6 +111,34 @@ public class ArrayOperations {
         System.out.println(Arrays.toString(arr));
     }
 
+    public static void shiftNegativeAndPositive(int[] arr) {
+        if (arr.length <= 1)
+            return;
+
+        int left = 0;
+        int right = 0;
+
+        while (left != arr.length) {
+            if (arr[left] < 0) {
+                if (left == right) {
+                    left++;
+                    right++;
+                } else if (left > right) {
+                    swap(arr, left, right);
+                    right++;
+                }
+            } else {
+                left++;
+            }
+        }
+    }
+
+    private static void swap(int[] arr, int pos1, int pos2) {
+        int temp = arr[pos1];
+        arr[pos1] = arr[pos2];
+        arr[pos2] = temp;
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
@@ -127,5 +155,9 @@ public class ArrayOperations {
 
         int[] arr2 = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
         sort012(arr2);
+
+        int[] arr3 = {1, 2, -3, 4, 5, 6, -7, 8, -9};
+        shiftNegativeAndPositive(arr3);
+        System.out.println(Arrays.toString(arr3));
     }
 }
