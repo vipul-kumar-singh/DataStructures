@@ -103,6 +103,32 @@ public class ArrayOperationsLevel2 {
         return -1;
     }
 
+    public static int countSubArrayWithEqualZeroAndOne(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int sum = 0;
+        int count = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0)
+                arr[i] = -1;
+
+            sum += arr[i];
+
+            if (sum == 0)
+                count++;
+
+            if (map.containsKey(sum)) {
+                count += map.get(sum);
+                map.put(sum, map.get(sum) + 1);
+            } else {
+                map.put(sum, 1);
+            }
+        }
+
+        return count;
+    }
+
 
     public static void main(String[] args) {
 
@@ -128,6 +154,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr8 = {-1, 2, -1, 2, 3, 2, 0};
         System.out.println(findFirstNotRepeatingElement(arr8));
+
+        int[] arr9 = {1, 0, 0, 1, 1, 0, 0, 1};
+        System.out.println(countSubArrayWithEqualZeroAndOne(arr9));
     }
 
 }
