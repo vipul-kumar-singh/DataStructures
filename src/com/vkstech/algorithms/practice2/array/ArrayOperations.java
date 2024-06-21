@@ -26,8 +26,21 @@ public class ArrayOperations {
         return -1;
     }
 
+    public static int findMinElement(int[] arr) {
+        if (arr.length == 0)
+            return -1;
+
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            min = Math.min(min, arr[i]);
+        }
+        return min;
+    }
+
     public static void main(String[] args) {
         int[] arr = {100, 13, 15, 20, 23, 90, 97};
         System.out.println(findPeakElement(arr));
+
+        System.out.println(findMinElement(arr));
     }
 }
