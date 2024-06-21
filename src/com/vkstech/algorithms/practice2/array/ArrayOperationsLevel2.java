@@ -54,6 +54,22 @@ public class ArrayOperationsLevel2 {
         return count;
     }
 
+    public static void findDuplicates(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>(arr.length - 1);
+
+        for (int num : arr) {
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        map.entrySet().stream().filter(entry -> entry.getValue() > 1)
+                .forEach(entry -> System.out.print(entry.getKey() + " "));
+        System.out.println();
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -67,6 +83,9 @@ public class ArrayOperationsLevel2 {
         int[] arr3 = {1, 1, 1, 1};
         int sum = 2;
         System.out.println(countPairsWithSum(arr3, sum));
+
+        int[] arr4 = {1, 2, 3, 6, 3, 6, 1};
+        findDuplicates(arr4);
     }
 
 }
