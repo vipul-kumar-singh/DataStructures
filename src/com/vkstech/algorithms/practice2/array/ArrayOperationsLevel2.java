@@ -87,6 +87,22 @@ public class ArrayOperationsLevel2 {
         System.out.println();
     }
 
+    public static int findFirstNotRepeatingElement(int[] arr) {
+        boolean found;
+        for (int i = 0; i < arr.length; i++) {
+            found = false;
+            for (int j = 0; j < arr.length; j++) {
+                if (i != j && arr[i] == arr[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                return arr[i];
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
 
@@ -109,6 +125,9 @@ public class ArrayOperationsLevel2 {
         int[] arr6 = {6, 7, 10, 20, 80, 100};
         int[] arr7 = {3, 4, 6, 7, 15, 20, 30, 70, 80, 120};
         findCommonELements(arr5, arr6, arr7);
+
+        int[] arr8 = {-1, 2, -1, 2, 3, 2, 0};
+        System.out.println(findFirstNotRepeatingElement(arr8));
     }
 
 }
