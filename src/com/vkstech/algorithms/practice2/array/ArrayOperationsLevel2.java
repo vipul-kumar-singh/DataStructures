@@ -339,6 +339,35 @@ public class ArrayOperationsLevel2 {
         return ans;
     }
 
+    public static int findMinJumps(int[] arr) {
+        int jumps = 1;
+
+        for (int i = 0; i < arr.length; ) {
+            int steps = arr[i];
+            i = findMaxStep(arr, i + 1, i + steps);
+
+            if (i >= arr.length - 1)
+                break;
+
+            jumps++;
+        }
+        return jumps;
+    }
+
+    private static int findMaxStep(int[] arr, int i, int j) {
+        int max = i;
+
+        if (j >= arr.length - 1)
+            return arr.length;
+
+        for (; i <= j; i++) {
+            if (arr[i] > max)
+                max = i;
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -399,6 +428,9 @@ public class ArrayOperationsLevel2 {
         int[] arr17 = {1, 5, 15, 10};
         int k = 3;
         System.out.println(getMinDiff(arr17, k));
+
+        int[] arr18 = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+        System.out.println(findMinJumps(arr18));
 
     }
 
