@@ -226,6 +226,28 @@ public class ArrayOperationsLevel2 {
         System.out.println();
     }
 
+    public static int maximumProductSubArray(int[] arr) {
+        int[] max = new int[arr.length];
+        int[] min = new int[arr.length];
+
+        max[0] = min[0] = arr[0];
+        int result = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                max[i] = Math.max(arr[i], max[i - 1] * arr[i]);
+                min[i] = Math.min(arr[i], max[i - 1] * arr[i]);
+            } else {
+                max[i] = Math.max(arr[i], min[i - 1] * arr[i]);
+                min[i] = Math.min(arr[i], max[i - 1] * arr[i]);
+            }
+
+            result = Math.max(result, max[i]);
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -266,6 +288,9 @@ public class ArrayOperationsLevel2 {
 
         int[] factorial = factorial(100);
         printArrayAsNumber(factorial);
+
+        int[] arr13 = {6, -3, -10, 0, 2};
+        System.out.println(maximumProductSubArray(arr13));
     }
 
 }
