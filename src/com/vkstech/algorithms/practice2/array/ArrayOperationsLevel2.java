@@ -278,6 +278,28 @@ public class ArrayOperationsLevel2 {
         return min;
     }
 
+    public static int maxSumAmongRotations(int[] arr) {
+        int n = arr.length;
+
+        int curSum = 0;
+        for (int num : arr)
+            curSum += num;
+
+        int curVal = 0;
+        for (int i = 0; i < n; i++)
+            curVal += (i * arr[i]);
+
+        int result = curVal;
+
+        for (int i = 1; i < n; i++) {
+            int nextVal = curVal - (curSum - arr[i - 1]) + (arr[i - 1] * (n - 1));
+            curVal = nextVal;
+            result = Math.max(result, nextVal);
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -327,6 +349,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr15 = {5, 6, 1, 2, 3, 4};
         System.out.println(getMinInSortedAndRotatedArray(arr15));
+
+        int[] arr16 = {8, 3, 1, 2};
+        System.out.println(maxSumAmongRotations(arr16));
     }
 
 }
