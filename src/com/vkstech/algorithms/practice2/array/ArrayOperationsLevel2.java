@@ -248,6 +248,28 @@ public class ArrayOperationsLevel2 {
         return result;
     }
 
+    public static int findLongestConsecutiveSubsequence(int[] arr) {
+        Set<Integer> set = new HashSet<>();
+
+        Arrays.stream(arr).forEach(set::add);
+
+        int maxCount = 0;
+
+        for (int num : arr) {
+            if (!set.contains(num - 1)) {
+                int count = 0;
+                while (set.contains(num)) {
+                    count++;
+                    num++;
+                }
+                maxCount = Math.max(maxCount, count);
+            }
+        }
+
+        return maxCount;
+    }
+
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -291,6 +313,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr13 = {6, -3, -10, 0, 2};
         System.out.println(maximumProductSubArray(arr13));
+
+        int[] arr14 = {36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42};
+        System.out.println(findLongestConsecutiveSubsequence(arr14));
     }
 
 }
