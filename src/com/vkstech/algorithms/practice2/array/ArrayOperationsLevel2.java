@@ -300,6 +300,25 @@ public class ArrayOperationsLevel2 {
         return result;
     }
 
+    public static int minPlatform(int[] arr, int[] dep) {
+        int n = arr.length;
+        int requiredPlatform = 1;
+
+        // for values from 0 to 2360
+        int[] platform = new int[2361];
+        for (int i = 0; i < n; i++) {
+            ++platform[arr[i]];
+            --platform[dep[i] + 1];
+        }
+
+        for (int i = 1; i < 2361; i++) {
+            platform[i] = platform[i] + platform[i - 1];
+            requiredPlatform = Math.max(requiredPlatform, platform[i]);
+        }
+
+        return requiredPlatform;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -352,6 +371,10 @@ public class ArrayOperationsLevel2 {
 
         int[] arr16 = {8, 3, 1, 2};
         System.out.println(maxSumAmongRotations(arr16));
+
+        int[] arr = {100, 300, 600};
+        int[] dep = {900, 400, 500};
+        System.out.println(minPlatform(arr, dep));
     }
 
 }
