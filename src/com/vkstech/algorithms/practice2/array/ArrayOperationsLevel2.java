@@ -190,6 +190,42 @@ public class ArrayOperationsLevel2 {
         return maxSum;
     }
 
+    public static int[] factorial(int num) {
+        int[] res = new int[200];
+        res[199] = 1;
+
+        for (int i = 2; i <= num; i++) {
+            multiply(res, i);
+        }
+
+        return res;
+    }
+
+    public static void multiply(int[] arr, int k) {
+        int n = arr.length - 1;
+
+        int carry = 0;
+        for (int i = n; i >= 0; i--) {
+            int res = (arr[i] * k) + carry;
+            arr[i] = res % 10;
+            carry = res / 10;
+        }
+
+    }
+
+    private static void printArrayAsNumber(int[] arr) {
+        boolean printZero = false;
+
+        for (int num : arr) {
+            if (num != 0)
+                printZero = true;
+
+            if (printZero)
+                System.out.print(num);
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -227,6 +263,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr12 = {-2, -3, 4, -1, -2, 1, 5, -3};
         System.out.println(largestSumOfSubArray(arr12));
+
+        int[] factorial = factorial(100);
+        printArrayAsNumber(factorial);
     }
 
 }
