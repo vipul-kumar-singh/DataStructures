@@ -440,6 +440,46 @@ public class ArrayOperationsLevel2 {
             return findFirstIndexOf1(arr, low, mid - 1);
     }
 
+    private static void printSpiral(int[][] arr) {
+        int r = arr.length;
+        int c = arr[0].length;
+
+        int m = 0;
+        int n = 0;
+        int loop = 0;
+
+        int[] res = new int[r * c];
+
+        int i = 0;
+        while (i < res.length) {
+
+            if (m == loop && n == loop) {
+                while (n < c)
+                    res[i++] = arr[m][n++];
+                n--;
+
+            } else if (m == loop && n == c - 1) {
+                while (m < r - 1)
+                    res[i++] = arr[++m][n];
+
+            } else if (m == r - 1 && n == c - 1) {
+                while (n > loop)
+                    res[i++] = arr[m][--n];
+
+            } else {
+                while (m > loop + 1) {
+                    res[i++] = arr[--m][n];
+                }
+                loop++;
+                n++;
+                r--;
+                c--;
+            }
+        }
+
+        System.out.println(Arrays.toString(res));
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -514,8 +554,13 @@ public class ArrayOperationsLevel2 {
                 {0, 1, 1, 1},
                 {1, 1, 1, 1},
                 {0, 0, 0, 0}};
-        System.out.println("Index of row with maximum 1s is "
-                + fndRowWithMax1s(mat));
+        System.out.println("Index of row with maximum 1s is " + fndRowWithMax1s(mat));
+
+        int[][] arr19 = {{1, 2, 3, 4},
+                {12, 13, 14, 5},
+                {11, 16, 15, 6},
+                {10, 9, 8, 7}};
+        printSpiral(arr19);
     }
 
 }
