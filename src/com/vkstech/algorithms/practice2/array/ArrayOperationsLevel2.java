@@ -368,6 +368,25 @@ public class ArrayOperationsLevel2 {
         return max;
     }
 
+    public static int[] calculateStockSpan(int[] price) {
+        int n = price.length;
+
+        int[] stock = new int[n];
+        stock[0] = 0;
+
+        for (int i = 1; i < n; i++) {
+            stock[i] = 1;
+
+            int j = i - 1;
+            while (j >= 0 && (price[i] >= price[j])) {
+                stock[i]++;
+                j--;
+            }
+        }
+
+        return stock;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -432,6 +451,9 @@ public class ArrayOperationsLevel2 {
         int[] arr18 = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
         System.out.println(findMinJumps(arr18));
 
+        int[] priceArr = {100, 80, 60, 70, 60, 75, 85};
+        int[] stocks = calculateStockSpan(priceArr);
+        System.out.println(Arrays.toString(stocks));
     }
 
 }
