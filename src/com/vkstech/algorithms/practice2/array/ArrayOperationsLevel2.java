@@ -1,8 +1,6 @@
 package com.vkstech.algorithms.practice2.array;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArrayOperationsLevel2 {
@@ -166,6 +164,20 @@ public class ArrayOperationsLevel2 {
         arr[i] = temp;
     }
 
+    public static boolean subArraySumZero(int[] arr) {
+        Set<Integer> set = new HashSet<>();
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+
+            if (sum == 0 || num == 0 || set.contains(sum))
+                return true;
+
+            set.add(sum);
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -197,6 +209,9 @@ public class ArrayOperationsLevel2 {
         int[] arr10 = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
         reArrangeAltPositiveNegative(arr10);
         System.out.println(Arrays.toString(arr10));
+
+        int[] arr11 = {4, 2, -3, 1, 6};
+        System.out.println(subArraySumZero(arr11));
     }
 
 }
