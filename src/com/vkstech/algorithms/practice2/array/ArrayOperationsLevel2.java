@@ -387,6 +387,27 @@ public class ArrayOperationsLevel2 {
         return stock;
     }
 
+    public static void findTripletSum(int[] arr, int sum) {
+        int n = arr.length;
+
+        for (int i = 0; i < arr.length - 2; i++) {
+            Set<Integer> set = new HashSet<>();
+
+            int curSum = sum - arr[i];
+
+            for (int j = i+1; j < arr.length; j++) {
+                int val = curSum - arr[j];
+
+                if(set.contains(val)){
+                    System.out.println("Triplet is: " + arr[i] + ", " +arr[j] + ", " +val);
+                    return;
+                }
+
+                set.add(arr[j]);
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -454,6 +475,8 @@ public class ArrayOperationsLevel2 {
         int[] priceArr = {100, 80, 60, 70, 60, 75, 85};
         int[] stocks = calculateStockSpan(priceArr);
         System.out.println(Arrays.toString(stocks));
+
+        findTripletSum(arr18, 23);
     }
 
 }
