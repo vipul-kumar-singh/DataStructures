@@ -236,7 +236,7 @@ public class ArrayOperationsLevel2 {
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] > 0) {
                 max[i] = Math.max(arr[i], max[i - 1] * arr[i]);
-                min[i] = Math.min(arr[i], max[i - 1] * arr[i]);
+                min[i] = Math.min(arr[i], min[i - 1] * arr[i]);
             } else {
                 max[i] = Math.max(arr[i], min[i - 1] * arr[i]);
                 min[i] = Math.min(arr[i], max[i - 1] * arr[i]);
