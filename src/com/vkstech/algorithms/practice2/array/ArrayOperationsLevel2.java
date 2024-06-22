@@ -269,6 +269,14 @@ public class ArrayOperationsLevel2 {
         return maxCount;
     }
 
+    public static int getMinInSortedAndRotatedArray(int[] arr) {
+        int min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < min)
+                min = arr[i];
+        }
+        return min;
+    }
 
     public static void main(String[] args) {
 
@@ -316,6 +324,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr14 = {36, 41, 56, 35, 44, 33, 34, 92, 43, 32, 42};
         System.out.println(findLongestConsecutiveSubsequence(arr14));
+
+        int[] arr15 = {5, 6, 1, 2, 3, 4};
+        System.out.println(getMinInSortedAndRotatedArray(arr15));
     }
 
 }
