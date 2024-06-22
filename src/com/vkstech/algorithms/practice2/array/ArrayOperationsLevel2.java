@@ -178,6 +178,18 @@ public class ArrayOperationsLevel2 {
         return false;
     }
 
+    public static int largestSumOfSubArray(int[] arr) {
+        int sum = arr[0];
+        int maxSum = arr[0];
+
+        for (int num : arr) {
+            sum = Math.max(num, sum + num);
+            maxSum = Math.max(sum, maxSum);
+        }
+
+        return maxSum;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -212,6 +224,9 @@ public class ArrayOperationsLevel2 {
 
         int[] arr11 = {4, 2, -3, 1, 6};
         System.out.println(subArraySumZero(arr11));
+
+        int[] arr12 = {-2, -3, 4, -1, -2, 1, 5, -3};
+        System.out.println(largestSumOfSubArray(arr12));
     }
 
 }
