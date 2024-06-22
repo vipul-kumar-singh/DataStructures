@@ -395,17 +395,49 @@ public class ArrayOperationsLevel2 {
 
             int curSum = sum - arr[i];
 
-            for (int j = i+1; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 int val = curSum - arr[j];
 
-                if(set.contains(val)){
-                    System.out.println("Triplet is: " + arr[i] + ", " +arr[j] + ", " +val);
+                if (set.contains(val)) {
+                    System.out.println("Triplet is: " + arr[i] + ", " + arr[j] + ", " + val);
                     return;
                 }
 
                 set.add(arr[j]);
             }
         }
+    }
+
+    public static int fndRowWithMax1s(int[][] mat) {
+        int maxRowIndex = 0;
+        int max = -1;
+        int index;
+
+        for (int i = 0; i < mat.length; i++) {
+            int[] arr = mat[i];
+            int n = arr.length;
+            index = findFirstIndexOf1(arr, 0, n - 1);
+
+            if (index != -1 && n - index > max) {
+                max = n - index;
+                maxRowIndex = i;
+            }
+        }
+        return maxRowIndex;
+    }
+
+    private static int findFirstIndexOf1(int[] arr, int low, int high) {
+        if (high < low)
+            return -1;
+
+        int mid = low + (high - low) / 2;
+
+        if ((mid == 0 || (arr[mid - 1] == 0)) && arr[mid] == 1)
+            return mid;
+        else if (arr[mid] == 0)
+            return findFirstIndexOf1(arr, mid + 1, high);
+        else
+            return findFirstIndexOf1(arr, low, mid - 1);
     }
 
     public static void main(String[] args) {
@@ -477,6 +509,13 @@ public class ArrayOperationsLevel2 {
         System.out.println(Arrays.toString(stocks));
 
         findTripletSum(arr18, 23);
+
+        int[][] mat = {{0, 0, 0, 1},
+                {0, 1, 1, 1},
+                {1, 1, 1, 1},
+                {0, 0, 0, 0}};
+        System.out.println("Index of row with maximum 1s is "
+                + fndRowWithMax1s(mat));
     }
 
 }
