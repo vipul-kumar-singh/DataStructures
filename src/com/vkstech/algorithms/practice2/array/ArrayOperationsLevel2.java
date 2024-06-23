@@ -506,6 +506,40 @@ public class ArrayOperationsLevel2 {
         }
     }
 
+    public static int countRainWater(int[] arr) {
+        int n = arr.length - 1;
+
+        int prev = arr[0];
+        int prevIndex = 0;
+        int water = 0;
+        int temp = 0;
+
+        for (int i = 1; i <= n; i++) {
+            if (arr[i] >= prev) {
+                prev = arr[i];
+                prevIndex = i;
+                temp = 0;
+            } else {
+                water += prev - arr[i];
+                temp += prev - arr[i];
+            }
+        }
+
+        if (prevIndex < n) {
+            water -= temp;
+            prev = arr[n];
+
+            for (int i = n; i >= prevIndex; i--) {
+                if (arr[i] > prev) {
+                    prev = arr[i];
+                } else {
+                    water += prev - arr[i];
+                }
+            }
+        }
+        return water;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -595,6 +629,9 @@ public class ArrayOperationsLevel2 {
         int[] arr22 = {10, 5, 6, 3, 2, 20, 100, 80};
         sortArrayInWaveForm(arr22);
         System.out.println(Arrays.toString(arr22));
+
+        int[] arr23 = {3, 0, 1, 0, 4, 0, 2};
+        System.out.println(countRainWater(arr23));
     }
 
 }
