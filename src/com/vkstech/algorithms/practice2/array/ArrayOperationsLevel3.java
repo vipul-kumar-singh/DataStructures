@@ -66,13 +66,35 @@ public class ArrayOperationsLevel3 {
 
     }
 
+    public static void findMissingAndRepeatingNumber(int[] arr) {
+        int[] temp = new int[arr.length];
+        int missing = 0;
+        int repeating = 0;
+
+        for (int num : arr) {
+            if (temp[num - 1] == 1)
+                repeating = num;
+            else
+                temp[num - 1] = 1;
+        }
+
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] == 0)
+                missing = i + 1;
+        }
+
+        System.out.println("Repeating value is " + repeating + ", and missing value is " + missing + ".");
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {34, 8, 10, 3, 2, 80, 30, 33, 1};
         System.out.println(maxIndexDiff(arr1));
 
-
         int[] arr2 = {2, 3, 7, 10, 12, 15, 30, 34};
         int[] arr3 = {1, 5, 7, 8, 10, 15, 16, 19};
         System.out.println(maxSumPath(arr2, arr3));
+
+        int[] arr4 = {4, 3, 6, 2, 1, 1};
+        findMissingAndRepeatingNumber(arr4);
     }
 }
