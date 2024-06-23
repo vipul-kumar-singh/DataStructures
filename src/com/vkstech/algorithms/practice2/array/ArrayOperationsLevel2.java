@@ -480,6 +480,18 @@ public class ArrayOperationsLevel2 {
         System.out.println(Arrays.toString(res));
     }
 
+    public static boolean checkIfSubset(int[] arr1, int[] arr2) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.stream(arr1).forEach(set::add);
+
+        for (int num : arr2) {
+            if (!set.contains(num))
+                return false;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -561,6 +573,10 @@ public class ArrayOperationsLevel2 {
                 {11, 16, 15, 6},
                 {10, 9, 8, 7}};
         printSpiral(arr19);
+
+        int[] arr20 = {11, 1, 13, 21, 3, 7};
+        int[] arr21 = {11, 3, 7, 1};
+        System.out.println(checkIfSubset(arr20, arr21));
     }
 
 }
