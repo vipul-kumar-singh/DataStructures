@@ -113,6 +113,31 @@ public class ArrayOperationsLevel3 {
         return maxProfit;
     }
 
+    public static void printClosest(int[] arr, int k) {
+        int left = 0;
+        int right = 0;
+
+        int l = 0;
+        int r = arr.length - 1;
+        int diff = Integer.MAX_VALUE;
+
+        while (r > l) {
+            int temp = Math.abs(arr[l] + arr[r] - k);
+
+            if (temp < diff) {
+                left = l;
+                right = r;
+                diff = temp;
+            }
+            if (arr[l] + arr[r] > k)
+                r--;
+            else
+                l++;
+        }
+
+        System.out.println("The closest pair is " + arr[left] + " and " + arr[right] + ".");
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {34, 8, 10, 3, 2, 80, 30, 33, 1};
         System.out.println(maxIndexDiff(arr1));
@@ -126,5 +151,9 @@ public class ArrayOperationsLevel3 {
 
         int[] priceArr = {100, 180, 260, 310, 40, 535, 695};
         System.out.println(getMaximumProfit(priceArr));
+
+        int[] arr5 = {10, 22, 28, 29, 30, 40};
+        int k = 54;
+        printClosest(arr5, k);
     }
 }
