@@ -133,7 +133,7 @@ public class ArrayOperations {
         }
     }
 
-    private static void swap(int[] arr, int pos1, int pos2) {
+    public static void swap(int[] arr, int pos1, int pos2) {
         int temp = arr[pos1];
         arr[pos1] = arr[pos2];
         arr[pos2] = temp;
