@@ -3,6 +3,8 @@ package com.vkstech.algorithms.practice2.array;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.vkstech.algorithms.practice2.array.ArrayOperations.swap;
+
 public class ArrayOperationsLevel2 {
 
     public static void cyclicRotateArray(int[] arr, int k) {
@@ -492,6 +494,18 @@ public class ArrayOperationsLevel2 {
         return true;
     }
 
+    public static void sortArrayInWaveForm(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i += 2) {
+
+            if (i > 0 && arr[i - 1] > arr[i])
+                swap(arr, i, i - 1);
+
+            if (i < n - 1 && arr[i + 1] > arr[i])
+                swap(arr, i, i + 1);
+        }
+    }
+
     public static void main(String[] args) {
 
         int[] arr1 = {1, 2, 3, 4, 5};
@@ -577,6 +591,10 @@ public class ArrayOperationsLevel2 {
         int[] arr20 = {11, 1, 13, 21, 3, 7};
         int[] arr21 = {11, 3, 7, 1};
         System.out.println(checkIfSubset(arr20, arr21));
+
+        int[] arr22 = {10, 5, 6, 3, 2, 20, 100, 80};
+        sortArrayInWaveForm(arr22);
+        System.out.println(Arrays.toString(arr22));
     }
 
 }
