@@ -86,6 +86,33 @@ public class ArrayOperationsLevel3 {
         System.out.println("Repeating value is " + repeating + ", and missing value is " + missing + ".");
     }
 
+    public static int getMaximumProfit(int[] price) {
+        int maxProfit = 0;
+        int min = price[0];
+        int max = price[0];
+
+        int n = price.length;
+        int i = 1;
+
+        while (i < n) {
+
+            while (i < n && price[i] <= price[i - 1]) {
+                min = price[i];
+                i++;
+            }
+
+            while (i < n && price[i] > price[i - 1]) {
+                max = price[i];
+                i++;
+            }
+
+            maxProfit += (max - min);
+
+        }
+
+        return maxProfit;
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {34, 8, 10, 3, 2, 80, 30, 33, 1};
         System.out.println(maxIndexDiff(arr1));
@@ -96,5 +123,8 @@ public class ArrayOperationsLevel3 {
 
         int[] arr4 = {4, 3, 6, 2, 1, 1};
         findMissingAndRepeatingNumber(arr4);
+
+        int[] priceArr = {100, 180, 260, 310, 40, 535, 695};
+        System.out.println(getMaximumProfit(priceArr));
     }
 }
