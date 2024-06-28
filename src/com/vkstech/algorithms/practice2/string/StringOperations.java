@@ -2,11 +2,12 @@ package com.vkstech.algorithms.practice2.string;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StringOperations {
 
     public static boolean isPalindrome(String str) {
-        if (str == null || str.isEmpty())
+        if (isNullOrEmpty(str))
             return false;
 
         int n = str.length();
@@ -72,7 +73,7 @@ public class StringOperations {
     }
 
     public static String convertFirstToUpperCase(String str) {
-        if (str == null || str.isEmpty())
+        if (isNullOrEmpty(str))
             return str;
 
         str = str.trim();
@@ -94,6 +95,33 @@ public class StringOperations {
         return c;
     }
 
+    private static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
+    public static String sortDescending(String str) {
+        if (isNullOrEmpty(str))
+            return str;
+
+        Map<Character, Integer> map = new TreeMap<>((a, b) -> b - a);
+        for (char c : str.toCharArray()) {
+            if (map.containsKey(c))
+                map.put(c, map.get(c) + 1);
+            else
+                map.put(c, 1);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        map.forEach((key, value) -> {
+            while (value > 0) {
+                sb.append(key);
+                value--;
+            }
+        });
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -108,5 +136,7 @@ public class StringOperations {
         String s5 = "i love programming";
         s5 = convertFirstToUpperCase(s5);
         System.out.println(s5);
+
+        System.out.println(sortDescending(s2));
     }
 }
