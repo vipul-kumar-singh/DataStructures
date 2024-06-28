@@ -71,6 +71,29 @@ public class StringOperations {
         return true;
     }
 
+    public static String convertFirstToUpperCase(String str) {
+        if (str == null || str.isEmpty())
+            return str;
+
+        str = str.trim();
+
+        char[] strArr = str.toCharArray();
+        strArr[0] = toUpperCase(strArr[0]);
+
+        for (int i = 1; i < str.length(); i++) {
+            if (strArr[i] == ' ' && strArr[i + 1] != ' ')
+                strArr[i + 1] = toUpperCase(strArr[i + 1]);
+        }
+
+        return new String(strArr);
+    }
+
+    private static char toUpperCase(char c) {
+        if (c >= 97 && c <= 122)
+            return (char) ((int) c - 32);
+        return c;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -81,5 +104,9 @@ public class StringOperations {
 
         String s4 = "geeksfogeeks";
         System.out.println(isAnagramPalindrome(s4));
+
+        String s5 = "i love programming";
+        s5 = convertFirstToUpperCase(s5);
+        System.out.println(s5);
     }
 }
