@@ -1,8 +1,6 @@
 package com.vkstech.algorithms.practice2.string;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class StringOperations {
 
@@ -157,6 +155,40 @@ public class StringOperations {
         return sb.toString();
     }
 
+    public static boolean isGoodString(String str) {
+        if (isNullOrEmpty(str))
+            return true;
+
+        Set<Character> set = new HashSet<>();
+        set.add('a');
+        set.add('e');
+        set.add('i');
+        set.add('o');
+        set.add('u');
+
+        int vowel = 0;
+        int cons = 0;
+
+        for (char c : str.toCharArray()) {
+            if (c == '?') {
+                vowel++;
+                cons++;
+            } else if (set.contains(c)) {
+                vowel++;
+                cons = 0;
+            } else {
+                cons++;
+                vowel = 0;
+            }
+
+            if (vowel > 5 || cons > 3) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -177,5 +209,9 @@ public class StringOperations {
         String s6 = "Hello";
         String s7 = "Bye";
         System.out.println(mergeAlternatively(s6, s7));
+
+        String s8 = "aeioup???";
+        System.out.println(isGoodString(s8));
+
     }
 }
