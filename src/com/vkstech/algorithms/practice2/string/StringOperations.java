@@ -226,6 +226,21 @@ public class StringOperations {
         return max;
     }
 
+    public static String reverseWords(String str) {
+        if (isNullOrEmpty(str))
+            return str;
+
+        String[] arr = str.split("\\.");
+
+        StringJoiner sj = new StringJoiner(".");
+
+        for (int i = arr.length - 1; i >= 0; i--) {
+            sj.add(arr[i]);
+        }
+
+        return sj.toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -255,5 +270,8 @@ public class StringOperations {
 
         String s10 = "100klh564abc365bg";
         System.out.println(extractMaximum(s10));
+
+        String s11 = "i.like.this.program.very.much";
+        System.out.println(reverseWords(s11));
     }
 }
