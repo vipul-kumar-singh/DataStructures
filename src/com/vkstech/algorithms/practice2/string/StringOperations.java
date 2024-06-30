@@ -304,6 +304,32 @@ public class StringOperations {
         return false;
     }
 
+    public static boolean isKAnagram(String s1, String s2, int k) {
+        if (s1 == null && s2 == null)
+            return true;
+
+        if (s1 == null || s2 == null || s1.length() != s2.length())
+            return false;
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char c : s1.toCharArray()) {
+            if (map.containsKey(c))
+                map.put(c, map.get(c) + 1);
+            else
+                map.put(c, 1);
+        }
+
+        for (char c : s2.toCharArray()) {
+            if (map.containsKey(c))
+                map.put(c, map.get(c) - 1);
+            else
+                k--;
+        }
+
+        return k == 0;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -348,5 +374,10 @@ public class StringOperations {
         String s15 = "geeksforgeeks";
         String s16 = "forgeeksgeeks";
         System.out.println(isStringRotated(s15, s16));
+
+        String s17 = "fodre";
+        String s18 = "gorkw";
+        int k = 2;
+        System.out.println(isKAnagram(s17, s18, k));
     }
 }
