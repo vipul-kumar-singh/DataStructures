@@ -205,6 +205,27 @@ public class StringOperations {
         return sb.toString();
     }
 
+    public static int extractMaximum(String str) {
+        if (isNullOrEmpty(str))
+            return -1;
+
+        int max = 0;
+        int cur = 0;
+
+        for (char c : str.toCharArray()) {
+            int num = c - 48;
+
+            if (num >= 0 && num <= 9) {
+                cur = cur * 10 + num;
+                max = Math.max(max, cur);
+            } else {
+                cur = 0;
+            }
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -231,5 +252,8 @@ public class StringOperations {
 
         String s9 = "Mr John Smith";
         System.out.println(urlify(s9));
+
+        String s10 = "100klh564abc365bg";
+        System.out.println(extractMaximum(s10));
     }
 }
