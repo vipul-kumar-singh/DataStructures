@@ -122,6 +122,41 @@ public class StringOperations {
         return sb.toString();
     }
 
+    public static String mergeAlternatively(String s1, String s2) {
+        if (s1 == null && s2 == null)
+            return null;
+
+        if (s1 == null)
+            return s2;
+
+        if (s2 == null)
+            return s1;
+
+        if (s1.isEmpty() && s2.isEmpty())
+            return s1;
+
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+
+        while (i < s1.length() && i < s2.length()) {
+            sb.append(s1.charAt(i))
+                    .append(s2.charAt(i));
+            i++;
+        }
+
+        while (i < s1.length()) {
+            sb.append(s1.charAt(i));
+            i++;
+        }
+
+        while (i < s2.length()) {
+            sb.append(s2.charAt(i));
+            i++;
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -138,5 +173,9 @@ public class StringOperations {
         System.out.println(s5);
 
         System.out.println(sortDescending(s2));
+
+        String s6 = "Hello";
+        String s7 = "Bye";
+        System.out.println(mergeAlternatively(s6, s7));
     }
 }
