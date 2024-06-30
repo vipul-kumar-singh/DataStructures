@@ -189,6 +189,22 @@ public class StringOperations {
         return true;
     }
 
+    public static String urlify(String str) {
+        if (isNullOrEmpty(str))
+            return str;
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ' ')
+                sb.append("%20");
+            else
+                sb.append(str.charAt(i));
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -213,5 +229,7 @@ public class StringOperations {
         String s8 = "aeioup???";
         System.out.println(isGoodString(s8));
 
+        String s9 = "Mr John Smith";
+        System.out.println(urlify(s9));
     }
 }
