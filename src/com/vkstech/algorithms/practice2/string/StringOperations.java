@@ -241,6 +241,28 @@ public class StringOperations {
         return sj.toString();
     }
 
+    public static int strstr(String str, String x) {
+        if (isNullOrEmpty(str) || isNullOrEmpty(x))
+            return -1;
+
+        int i = 0;
+        int j = 0;
+
+        while (i < str.length()) {
+            if (str.charAt(i) == x.charAt(j)) {
+                j++;
+
+                if (j == x.length())
+                    return i - x.length() + 1;
+            } else {
+                j = 0;
+            }
+            i++;
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -273,5 +295,9 @@ public class StringOperations {
 
         String s11 = "i.like.this.program.very.much";
         System.out.println(reverseWords(s11));
+
+        String s12 = "GeeksForGeeks";
+        String x = "For";
+        System.out.println(strstr(s12, x));
     }
 }
