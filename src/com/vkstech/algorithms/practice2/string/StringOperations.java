@@ -280,6 +280,30 @@ public class StringOperations {
         return false;
     }
 
+    public static boolean isStringRotated(String s1, String s2) {
+        if (isNullOrEmpty(s1) || isNullOrEmpty(s2) || (s1.length() != s2.length()))
+            return false;
+
+        int j = 0;
+
+        while (j < s2.length()) {
+            if (s1.charAt(0) == s2.charAt(j)) {
+                int k = s1.length() - j;
+
+                String sub1 = s2.substring(j);
+                String sub2 = s1.substring(0, k);
+                String sub3 = s2.substring(0, j);
+                String sub4 = s1.substring(k);
+
+                if (sub1.equals(sub2) && sub3.equals(sub4))
+                    return true;
+            }
+            j++;
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -320,5 +344,9 @@ public class StringOperations {
         String s13 = "gksrek";
         String s14 = "geeksforgeeks";
         System.out.println(isSubSequence(s13, s14));
+
+        String s15 = "geeksforgeeks";
+        String s16 = "forgeeksgeeks";
+        System.out.println(isStringRotated(s15, s16));
     }
 }
