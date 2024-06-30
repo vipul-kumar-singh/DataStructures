@@ -263,6 +263,23 @@ public class StringOperations {
         return -1;
     }
 
+    public static boolean isSubSequence(String s1, String s2) {
+        if (isNullOrEmpty(s1) || isNullOrEmpty(s2))
+            return false;
+
+        int i = 0;
+
+        for (char c : s2.toCharArray()) {
+            if (c == s1.charAt(i))
+                i++;
+
+            if (i == s1.length())
+                return true;
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -299,5 +316,9 @@ public class StringOperations {
         String s12 = "GeeksForGeeks";
         String x = "For";
         System.out.println(strstr(s12, x));
+
+        String s13 = "gksrek";
+        String s14 = "geeksforgeeks";
+        System.out.println(isSubSequence(s13, s14));
     }
 }
