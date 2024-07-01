@@ -417,6 +417,41 @@ public class StringOperations {
         return max;
     }
 
+    public static char getKthCharInString(int m, int n, int k) {
+        String binaryString = decimalToBinary(m);
+        StringBuilder sb = new StringBuilder(binaryString);
+
+        for (int i = 0; i < n; i++) {
+            replaceChars(sb);
+        }
+
+        return sb.charAt(k - 1);
+    }
+
+    private static void replaceChars(StringBuilder sb) {
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == '0')
+                sb.replace(i, ++i, "01");
+            else
+                sb.replace(i, ++i, "10");
+        }
+    }
+
+    private static String decimalToBinary(int num) {
+        int bin = 0;
+        int count = 0;
+
+        while (num != 0) {
+            int rem = num % 2;
+            double c = Math.pow(10, count);
+            bin += (int) (rem * c);
+            num = num / 2;
+            count++;
+        }
+
+        return String.valueOf(bin);
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -479,5 +514,8 @@ public class StringOperations {
         System.out.println(findFirstNonRepeatingChar(s23));
 
         System.out.println(getLongestDistinctChars(s19));
+
+        int m = 5, n = 2, l = 5;
+        System.out.println(getKthCharInString(m, n, l));
     }
 }
