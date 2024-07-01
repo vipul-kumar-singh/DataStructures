@@ -1,6 +1,7 @@
 package com.vkstech.algorithms.practice2.string;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class StringOperations {
 
@@ -330,6 +331,36 @@ public class StringOperations {
         return k == 0;
     }
 
+    public static void findUncommonCharacters(String s1, String s2) {
+        if (s1 == null && s2 == null)
+            return;
+
+        if (s1 == null) {
+            System.out.println(s2);
+            return;
+        }
+
+        if (s2 == null) {
+            System.out.println(s1);
+            return;
+        }
+
+        Set<Character> set1 = new HashSet<>();
+        Set<Character> set2 = new HashSet<>();
+
+        for (char ch : s1.toCharArray())
+            set1.add(ch);
+
+        for (char ch : s2.toCharArray())
+            set2.add(ch);
+
+        List<Character> uncommon = set1.stream().filter(c -> !set2.contains(c)).collect(Collectors.toList());
+        uncommon.addAll(set2.stream().filter(c -> !set1.contains(c)).collect(Collectors.toList()));
+
+        uncommon.forEach(System.out::print);
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -379,5 +410,9 @@ public class StringOperations {
         String s18 = "gorkw";
         int k = 2;
         System.out.println(isKAnagram(s17, s18, k));
+
+        String s19 = "geeksforgeeks";
+        String s20 = "geeksquiz";
+        findUncommonCharacters(s19, s20);
     }
 }
