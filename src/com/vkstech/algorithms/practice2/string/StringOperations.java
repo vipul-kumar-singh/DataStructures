@@ -22,14 +22,7 @@ public class StringOperations {
         if (s1 == null || s2 == null || s1.length() != s2.length())
             return false;
 
-        Map<Character, Integer> map = new HashMap<>();
-
-        for (char c : s1.toCharArray()) {
-            if (map.containsKey(c))
-                map.put(c, map.get(c) + 1);
-            else
-                map.put(c, 1);
-        }
+        Map<Character, Integer> map = getCharCountMap(s1);
 
         for (char c : s2.toCharArray()) {
             if (map.containsKey(c))
@@ -46,17 +39,23 @@ public class StringOperations {
         return true;
     }
 
-    public static boolean isAnagramPalindrome(String str) {
-        if (str == null)
-            return false;
-
+    private static Map<Character, Integer> getCharCountMap(String str) {
         Map<Character, Integer> map = new HashMap<>();
+
         for (char c : str.toCharArray()) {
             if (map.containsKey(c))
                 map.put(c, map.get(c) + 1);
             else
                 map.put(c, 1);
         }
+        return map;
+    }
+
+    public static boolean isAnagramPalindrome(String str) {
+        if (str == null)
+            return false;
+
+        Map<Character, Integer> map = getCharCountMap(str);
 
         int oddCount = 0;
 
@@ -312,14 +311,7 @@ public class StringOperations {
         if (s1 == null || s2 == null || s1.length() != s2.length())
             return false;
 
-        Map<Character, Integer> map = new HashMap<>();
-
-        for (char c : s1.toCharArray()) {
-            if (map.containsKey(c))
-                map.put(c, map.get(c) + 1);
-            else
-                map.put(c, 1);
-        }
+        Map<Character, Integer> map = getCharCountMap(s1);
 
         for (char c : s2.toCharArray()) {
             if (map.containsKey(c))
@@ -358,6 +350,37 @@ public class StringOperations {
         uncommon.addAll(set2.stream().filter(c -> !set1.contains(c)).collect(Collectors.toList()));
 
         uncommon.forEach(System.out::print);
+        System.out.println();
+    }
+
+    public static void anagramOfStrings(String s1, String s2) {
+        if (isNullOrEmpty(s1) || isNullOrEmpty(s2))
+            return;
+
+        String a;
+        String b;
+
+        if (s1.length() >= s2.length()) {
+            a = s1;
+            b = s2;
+        } else {
+            a = s2;
+            b = s1;
+        }
+
+        Map<Character, Integer> map = getCharCountMap(a);
+
+        for (char c : b.toCharArray()) {
+            if (map.containsKey(c)){
+                map.put(c, map.get(c) - 1);
+            } else {
+                System.out.println("Anagram cannot be formed");
+                return;
+            }
+        }
+
+        System.out.print("Characters needed to be removed from String " + a + " are: ");
+        map.entrySet().stream().filter(entry -> entry.getValue() > 0).forEach(entry -> System.out.print(entry.getKey() + " "));
         System.out.println();
     }
 
@@ -414,5 +437,9 @@ public class StringOperations {
         String s19 = "geeksforgeeks";
         String s20 = "geeksquiz";
         findUncommonCharacters(s19, s20);
+
+        String s21 = "bcadeh";
+        String s22 = "hea";
+        anagramOfStrings(s21, s22);
     }
 }
