@@ -398,6 +398,25 @@ public class StringOperations {
         return '$';
     }
 
+    public static int getLongestDistinctChars(String str) {
+        if (isNullOrEmpty(str))
+            return 0;
+
+        int max = 0;
+
+        Set<Character> set = new HashSet<>();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (set.contains(str.charAt(i))) {
+                max = Math.max(max, set.size());
+                set.clear();
+            }
+            set.add(str.charAt(i));
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -458,5 +477,7 @@ public class StringOperations {
 
         String s23 = "zxvczbtxyzvy";
         System.out.println(findFirstNonRepeatingChar(s23));
+
+        System.out.println(getLongestDistinctChars(s19));
     }
 }
