@@ -550,6 +550,58 @@ public class StringOperations {
         return newPalindrome.length() > palindrome.length() ? newPalindrome : palindrome;
     }
 
+    public static String getSmallestWindow(String str, String pat) {
+        int len1 = str.length();
+        int len2 = pat.length();
+
+        if (len1 < len2) {
+            System.out.println("No such window exists");
+            return "";
+        }
+
+        int[] hash_pat = new int[256];
+        int[] hash_str = new int[256];
+
+        for (int i = 0; i < len2; i++)
+            hash_pat[pat.charAt(i)]++;
+
+        int start = 0;
+        int start_index = -1;
+        int min_len = Integer.MAX_VALUE;
+        int count = 0;
+
+        for (int j = 0; j < len1; j++) {
+
+            hash_str[str.charAt(j)]++;
+
+            if (hash_str[str.charAt(j)] <= hash_pat[str.charAt(j)])
+                count++;
+
+            if (count == len2) {
+                while (hash_str[str.charAt(start)] > hash_pat[str.charAt(start)] || hash_pat[str.charAt(start)] == 0) {
+
+                    if (hash_str[str.charAt(start)] > hash_pat[str.charAt(start)])
+                        hash_str[str.charAt(start)]--;
+
+                    start++;
+                }
+
+                int len_window = j - start + 1;
+                if (min_len > len_window) {
+                    min_len = len_window;
+                    start_index = start;
+                }
+            }
+        }
+
+        if (start_index == -1) {
+            System.out.println("No such window exists");
+            return "";
+        }
+
+        return str.substring(start_index, start_index + min_len);
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -628,5 +680,9 @@ public class StringOperations {
         System.out.println(findPalindrome(s26));
         String s27 = "forgeeksskeegfor";
         System.out.println(findPalindrome(s27));
+
+        String string = "this is a test string";
+        String pattern = "tist";
+        System.out.println(getSmallestWindow(string, pattern));
     }
 }
