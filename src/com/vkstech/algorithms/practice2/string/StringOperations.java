@@ -452,6 +452,44 @@ public class StringOperations {
         return String.valueOf(bin);
     }
 
+    public static String binaryAddition(String s1, String s2) {
+        StringBuilder sb = new StringBuilder();
+
+        int carry = 0;
+        int num1, num2, sum;
+
+        int m = s1.length() - 1;
+        int n = s2.length() - 1;
+
+        while (m >= 0 || n >= 0) {
+            num1 = m >= 0 ? (int) s1.charAt(m) - 48 : 0;
+            num2 = n >= 0 ? (int) s2.charAt(n) - 48 : 0;
+            sum = num1 + num2 + carry;
+
+            switch (sum) {
+                case 2:
+                    carry = 1;
+                    sb.append(0);
+                    break;
+                case 3:
+                    carry = 1;
+                    sb.append(1);
+                    break;
+                default:
+                    carry = 0;
+                    sb.append(sum);
+            }
+
+            m--;
+            n--;
+        }
+
+        if (carry == 1)
+            sb.append(carry);
+
+        return sb.reverse().toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -517,5 +555,9 @@ public class StringOperations {
 
         int m = 5, n = 2, l = 5;
         System.out.println(getKthCharInString(m, n, l));
+
+        String s24 = "1101";
+        String s25 = "111";
+        System.out.println(binaryAddition(s24, s25));
     }
 }
