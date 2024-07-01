@@ -524,6 +524,32 @@ public class StringOperations {
         return product.toString();
     }
 
+    public static String findPalindrome(String str) {
+        if (isNullOrEmpty(str))
+            return str;
+
+        String palindrome = "";
+
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.charAt(i) == str.charAt(i + 1))
+                palindrome = getPalindrome(str, i, i + 1, palindrome);
+            else if (i != 0 && str.charAt(i - 1) == str.charAt(i + 1))
+                palindrome = getPalindrome(str, i - 1, i + 1, palindrome);
+        }
+
+        return palindrome;
+    }
+
+    private static String getPalindrome(String str, int l, int r, String palindrome) {
+        while (l >= 0 && r < str.length() && str.charAt(l) == str.charAt(r)) {
+            l--;
+            r++;
+        }
+
+        String newPalindrome = String.valueOf(str.toCharArray(), l + 1, r - l - 1);
+        return newPalindrome.length() > palindrome.length() ? newPalindrome : palindrome;
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -597,5 +623,10 @@ public class StringOperations {
         String num1 = "1235421415454545454545454544";
         String num2 = "1714546546546545454544548544544545";
         System.out.println(multiply(num1, num2));
+
+        String s26 = "babcbabcbaccba";
+        System.out.println(findPalindrome(s26));
+        String s27 = "forgeeksskeegfor";
+        System.out.println(findPalindrome(s27));
     }
 }
