@@ -490,6 +490,40 @@ public class StringOperations {
         return sb.reverse().toString();
     }
 
+    public static String multiply(String num1, String num2) {
+        if (isNullOrEmpty(num1) || isNullOrEmpty(num2))
+            return null;
+
+        String s1 = new StringBuffer(num1).reverse().toString();
+        String s2 = new StringBuffer(num2).reverse().toString();
+
+        int[] m = new int[s1.length() + s2.length()];
+
+        for (int i = 0; i < s1.length(); i++) {
+            for (int j = 0; j < s2.length(); j++) {
+                m[i + j] = m[i + j] + (s1.charAt(i) - '0') * (s2.charAt(j) - '0');
+            }
+        }
+
+        StringBuilder product = new StringBuilder();
+
+        for (int i = 0; i < m.length; i++) {
+            int digit = m[i] % 10;
+            int carry = m[i] / 10;
+
+            if (i + 1 < m.length)
+                m[i + 1] += carry;
+
+            product.insert(0, digit);
+        }
+
+
+        while (product.length() > 1 && product.charAt(0) == '0')
+            product.deleteCharAt(0);
+
+        return product.toString();
+    }
+
     public static void main(String[] args) {
         String s1 = "abcba";
         System.out.println(isPalindrome(s1));
@@ -559,5 +593,9 @@ public class StringOperations {
         String s24 = "1101";
         String s25 = "111";
         System.out.println(binaryAddition(s24, s25));
+
+        String num1 = "1235421415454545454545454544";
+        String num2 = "1714546546546545454544548544544545";
+        System.out.println(multiply(num1, num2));
     }
 }
