@@ -371,7 +371,7 @@ public class StringOperations {
         Map<Character, Integer> map = getCharCountMap(a);
 
         for (char c : b.toCharArray()) {
-            if (map.containsKey(c)){
+            if (map.containsKey(c)) {
                 map.put(c, map.get(c) - 1);
             } else {
                 System.out.println("Anagram cannot be formed");
@@ -382,6 +382,20 @@ public class StringOperations {
         System.out.print("Characters needed to be removed from String " + a + " are: ");
         map.entrySet().stream().filter(entry -> entry.getValue() > 0).forEach(entry -> System.out.print(entry.getKey() + " "));
         System.out.println();
+    }
+
+    public static char findFirstNonRepeatingChar(String str) {
+        if (isNullOrEmpty(str))
+            return '$';
+
+        Map<Character, Integer> map = getCharCountMap(str);
+
+        for (char c : str.toCharArray()) {
+            if (map.get(c) == 1)
+                return c;
+        }
+
+        return '$';
     }
 
     public static void main(String[] args) {
@@ -441,5 +455,8 @@ public class StringOperations {
         String s21 = "bcadeh";
         String s22 = "hea";
         anagramOfStrings(s21, s22);
+
+        String s23 = "zxvczbtxyzvy";
+        System.out.println(findFirstNonRepeatingChar(s23));
     }
 }
