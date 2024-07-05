@@ -133,6 +133,29 @@ public class HashingOperations {
         map.keySet().stream().map(map::get).forEach(System.out::println);
     }
 
+
+    public static void countVotes(String[] votes) {
+        Map<String, Integer> map = new TreeMap<>();
+
+        for (String name : votes) {
+            if (map.containsKey(name))
+                map.put(name, map.get(name) + 1);
+            else
+                map.put(name, 1);
+        }
+
+        int vote = 0;
+        String winner = null;
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > vote) {
+                vote = entry.getValue();
+                winner = entry.getKey();
+            }
+        }
+
+        System.out.println(winner);
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -165,5 +188,8 @@ public class HashingOperations {
 
         String[] arr7 = {"act", "god", "cat", "dog", "tac"};
         printAnagramsTogether(arr7);
+
+        String[] arr8 = {"john", "johnny", "jackie", "johnny", "john", "jackie", "jamie", "jamie", "john", "johnny", "jamie", "johnny", "john"};
+        countVotes(arr8);
     }
 }
