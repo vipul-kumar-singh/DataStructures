@@ -182,6 +182,17 @@ public class HashingOperations {
         }
     }
 
+    public static void findTwoElementSumPairs(int[] arr, int sum) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int num : arr) {
+            if (set.contains(sum - num)) {
+                System.out.println(sum + " = " + num + " + " + (sum - num));
+            }
+            set.add(num);
+        }
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -219,11 +230,15 @@ public class HashingOperations {
         countVotes(arr8);
 
         int[] arr9 = {1, 4, 45, 6, 10, 8};
-        int sum = 16;
-        findTwoElementSum(arr9, sum);
+        int sum1 = 16;
+        findTwoElementSum(arr9, sum1);
 
         int[] arr10 = {1, 5, 3};
         int diff = 2;
         findTwoElementDiff(arr10, diff);
+
+        int[] arr11 = {1, 5, 7, 1};
+        int sum2 = 6;
+        findTwoElementSumPairs(arr11, sum2);
     }
 }
