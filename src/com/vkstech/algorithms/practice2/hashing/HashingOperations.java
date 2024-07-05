@@ -193,6 +193,20 @@ public class HashingOperations {
         }
     }
 
+    public static void findFibonacciElements(int[] arr) {
+        Arrays.stream(arr).filter(HashingOperations::isFibonacci).forEach(i -> System.out.print(i + " "));
+        System.out.println();
+    }
+
+    private static boolean isFibonacci(int n) {
+        return isPerfectSquare(5 * n * n + 4) || isPerfectSquare(5 * n * n - 4);
+    }
+
+    private static boolean isPerfectSquare(int x) {
+        int s = (int) Math.sqrt(x);
+        return (s * s == x);
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -240,5 +254,8 @@ public class HashingOperations {
         int[] arr11 = {1, 5, 7, 1};
         int sum2 = 6;
         findTwoElementSumPairs(arr11, sum2);
+
+        int[] arr12 = {1, 4, 3, 9, 10, 13, 7};
+        findFibonacciElements(arr12);
     }
 }
