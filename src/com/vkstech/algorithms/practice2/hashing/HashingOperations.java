@@ -207,6 +207,46 @@ public class HashingOperations {
         return (s * s == x);
     }
 
+    public static String convertToDecimal(int num, int den) {
+        if (num == 0)
+            return "0";
+        if (den == 0)
+            return "undefined";
+
+        StringBuilder result = new StringBuilder();
+        if ((num < 0) ^ (den < 0))
+            result.append("-");
+
+        num = Math.abs(num);
+        den = Math.abs(den);
+
+        long quo = num / den;
+        long rem = num % den * 10L;
+        result.append(quo);
+
+        if (rem == 0)
+            return result.toString();
+
+        result.append(".");
+        Map<Long, Integer> map = new HashMap<>();
+
+        while (rem != 0) {
+            if (map.containsKey(rem)) {
+                int i = map.get(rem);
+                String part1 = result.substring(0, i);
+                String part2 = "(" + result.substring(i, result.length()) + ")";
+                return part1 + part2;
+            }
+
+            map.put(rem, result.length());
+            quo = rem / den;
+            result.append(quo);
+            rem = (rem % den) * 10;
+        }
+
+        return result.toString();
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -257,5 +297,8 @@ public class HashingOperations {
 
         int[] arr12 = {1, 4, 3, 9, 10, 13, 7};
         findFibonacciElements(arr12);
+
+        int numerator = 1, denominator = 3;
+        System.out.println(convertToDecimal(numerator, denominator));
     }
 }
