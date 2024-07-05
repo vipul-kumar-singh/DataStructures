@@ -51,6 +51,24 @@ public class HashingOperations {
         return result;
     }
 
+    public static int atleastKOccurrences(int[] arr, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int num : arr) {
+            Integer temp = map.get(num);
+
+            if (temp == null) {
+                map.put(num, 1);
+            } else {
+                if (temp == k - 1)
+                    return num;
+                map.put(num, temp + 1);
+            }
+        }
+
+        return -1;
+    }
+
     public static boolean isEqualArrays(int[] arr1, int[] arr2) {
         if (arr1.length != arr2.length)
             return false;
@@ -99,5 +117,9 @@ public class HashingOperations {
         int[] arr2 = {1, 2, 5, 4, 0};
         int[] arr3 = {2, 4, 5, 0, 1};
         System.out.println(isEqualArrays(arr2, arr3));
+
+        int[] arr4 = {1, 7, 4, 3, 4, 8, 7};
+        int k = 2;
+        System.out.println(atleastKOccurrences(arr4, k));
     }
 }
