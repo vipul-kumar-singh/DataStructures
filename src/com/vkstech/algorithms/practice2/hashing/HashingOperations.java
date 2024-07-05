@@ -171,6 +171,17 @@ public class HashingOperations {
         System.out.println("Elements with sum " + sum + " does not exist.");
     }
 
+    public static void findTwoElementDiff(int[] arr, int diff) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.stream(arr).forEach(set::add);
+
+        for (int num : arr) {
+            if (set.contains(diff + num)) {
+                System.out.println(diff + " = " + (diff + num) + " - " + num);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -207,8 +218,12 @@ public class HashingOperations {
         String[] arr8 = {"john", "johnny", "jackie", "johnny", "john", "jackie", "jamie", "jamie", "john", "johnny", "jamie", "johnny", "john"};
         countVotes(arr8);
 
-        int[] arr = {1, 4, 45, 6, 10, 8};
+        int[] arr9 = {1, 4, 45, 6, 10, 8};
         int sum = 16;
-        findTwoElementSum(arr, sum);
+        findTwoElementSum(arr9, sum);
+
+        int[] arr10 = {1, 5, 3};
+        int diff = 2;
+        findTwoElementDiff(arr10, diff);
     }
 }
