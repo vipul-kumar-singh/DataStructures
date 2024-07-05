@@ -1,5 +1,6 @@
 package com.vkstech.algorithms.practice2.hashing;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,26 @@ public class HashingOperations {
         System.out.println();
     }
 
+    public static int[] frequencyMatch(int[] arr) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int num : arr) {
+            if (map.containsKey(num))
+                map.put(num, map.get(num) + 1);
+            else
+                map.put(num, 1);
+        }
+
+        int[] result = new int[arr.length];
+
+        for (int i = 1; i <= result.length; i++) {
+            Integer count = map.get(i);
+            result[i - 1] = count != null ? count : 0;
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -43,5 +64,9 @@ public class HashingOperations {
                 {14, 5, 3, 2, 1},
                 {1, 18, 3, 21, 14}};
         findCommonElements(mat2);
+
+        int[] arr1 = {2, 3, 2, 3, 5};
+        int[] result = frequencyMatch(arr1);
+        System.out.println(Arrays.toString(result));
     }
 }
