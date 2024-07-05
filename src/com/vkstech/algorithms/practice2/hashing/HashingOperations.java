@@ -1,8 +1,6 @@
 package com.vkstech.algorithms.practice2.hashing;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class HashingOperations {
 
@@ -96,6 +94,17 @@ public class HashingOperations {
         return true;
     }
 
+    public static void findMissing(int[] arr1, int[] arr2) {
+        Set<Integer> set = new HashSet<>();
+        Arrays.stream(arr2).forEach(set::add);
+
+        for (int num : arr1) {
+            if (!set.contains(num))
+                System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -121,5 +130,9 @@ public class HashingOperations {
         int[] arr4 = {1, 7, 4, 3, 4, 8, 7};
         int k = 2;
         System.out.println(atleastKOccurrences(arr4, k));
+
+        int[] arr5 = {1, 2, 3, 4, 5, 10};
+        int[] arr6 = {2, 3, 1, 0, 5};
+        findMissing(arr5, arr6);
     }
 }
