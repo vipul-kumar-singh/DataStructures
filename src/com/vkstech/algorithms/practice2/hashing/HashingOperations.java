@@ -156,6 +156,21 @@ public class HashingOperations {
         System.out.println(winner);
     }
 
+    public static void findTwoElementSum(int[] arr, int sum) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int num : arr) {
+            if (set.contains(sum - num)) {
+                System.out.println(sum + " = " + num + " + " + (sum - num));
+                return;
+            } else {
+                set.add(num);
+            }
+        }
+
+        System.out.println("Elements with sum " + sum + " does not exist.");
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -191,5 +206,9 @@ public class HashingOperations {
 
         String[] arr8 = {"john", "johnny", "jackie", "johnny", "john", "jackie", "jamie", "jamie", "john", "johnny", "jamie", "johnny", "john"};
         countVotes(arr8);
+
+        int[] arr = {1, 4, 45, 6, 10, 8};
+        int sum = 16;
+        findTwoElementSum(arr, sum);
     }
 }
