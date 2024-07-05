@@ -105,6 +105,34 @@ public class HashingOperations {
         System.out.println();
     }
 
+    public static void printAnagramsTogether(String[] strArr) {
+        Map<Map<Character, Integer>, List<String>> map = new HashMap<>();
+
+        for (String str : strArr) {
+            Map<Character, Integer> tempMap = new HashMap<>();
+
+            for (int i = 0; i < str.length(); i++) {
+                if (tempMap.containsKey(str.charAt(i))) {
+                    tempMap.put(str.charAt(i), tempMap.get(str.charAt(i)) + 1);
+                } else {
+                    tempMap.put(str.charAt(i), 1);
+                }
+            }
+
+
+            if (map.containsKey(tempMap)) {
+                map.get(tempMap).add(str);
+            } else {
+                List<String> tempList = new ArrayList<>();
+                tempList.add(str);
+                map.put(tempMap, tempList);
+            }
+
+        }
+
+        map.keySet().stream().map(map::get).forEach(System.out::println);
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -134,5 +162,8 @@ public class HashingOperations {
         int[] arr5 = {1, 2, 3, 4, 5, 10};
         int[] arr6 = {2, 3, 1, 0, 5};
         findMissing(arr5, arr6);
+
+        String[] arr7 = {"act", "god", "cat", "dog", "tac"};
+        printAnagramsTogether(arr7);
     }
 }
