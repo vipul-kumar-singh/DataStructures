@@ -247,6 +247,41 @@ public class HashingOperations {
         return result.toString();
     }
 
+    private static class Pair {
+        int first, second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public static void findFourElements(int[] arr, int k) {
+        int n = arr.length;
+
+        Map<Integer, Pair> map = new HashMap<>();
+        for (int i = 0; i < n - 1; i++)
+            for (int j = i + 1; j < n; j++)
+                map.put(arr[i] + arr[j], new Pair(i, j));
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int sum = arr[i] + arr[j];
+
+                if (map.containsKey(k - sum)) {
+                    Pair p = map.get(k - sum);
+                    if (p.first != i && p.first != j && p.second != i && p.second != j) {
+                        System.out.print(arr[i] + ", "
+                                + arr[j] + ", "
+                                + arr[p.first] + ", "
+                                + arr[p.second]);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[][] mat1 = {{2, 1, 4, 3},
                 {1, 2, 3, 2},
@@ -300,5 +335,9 @@ public class HashingOperations {
 
         int numerator = 1, denominator = 3;
         System.out.println(convertToDecimal(numerator, denominator));
+
+        int[] arr13 = {10, 20, 30, 40, 1, 2};
+        int x = 91;
+        findFourElements(arr13, x);
     }
 }
