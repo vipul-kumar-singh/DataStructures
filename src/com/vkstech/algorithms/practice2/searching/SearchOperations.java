@@ -196,6 +196,22 @@ public class SearchOperations {
         return -1;
     }
 
+    public static int findLastIndexOf1(int[] arr, int start, int end) {
+        if (start > end)
+            return -1;
+
+        int mid = (start + end) / 2;
+
+        if ((mid == arr.length - 1 || 1 < arr[mid + 1]) && arr[mid] == 1)
+            return mid;
+
+        if (1 < arr[mid])
+            return findLastIndexOf1(arr, start, mid - 1);
+        else
+            return findLastIndexOf1(arr, mid + 1, end);
+    }
+
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -222,5 +238,8 @@ public class SearchOperations {
 
         int[] arr7 = {0, 0, 0, 0, 1, 1, 1, 1};
         System.out.println(findTransitionPoint(arr7));
+
+        int[] arr8 = {0, 0, 0, 0, 1, 1, 1, 1};
+        System.out.println(findLastIndexOf1(arr8, 0, arr8.length - 1));
     }
 }
