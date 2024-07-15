@@ -211,6 +211,18 @@ public class SearchOperations {
             return findLastIndexOf1(arr, mid + 1, end);
     }
 
+    public static int findPeakElement(int[] arr, int low, int high) {
+        int mid = low + (high - low) / 2;
+
+        if ((mid == 0 || arr[mid - 1] <= arr[mid])
+                && (mid == arr.length - 1 || arr[mid + 1] <= arr[mid]))
+            return mid;
+
+        if (mid > 0 && arr[mid - 1] > arr[mid])
+            return findPeakElement(arr, low, (mid - 1));
+        else
+            return findPeakElement(arr, (mid + 1), high);
+    }
 
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
@@ -241,5 +253,8 @@ public class SearchOperations {
 
         int[] arr8 = {0, 0, 0, 0, 1, 1, 1, 1};
         System.out.println(findLastIndexOf1(arr8, 0, arr8.length - 1));
+
+        int[] arr9 = {1, 3, 20, 4, 1, 0};
+        System.out.println(findPeakElement(arr9, 0, arr9.length - 1));
     }
 }
