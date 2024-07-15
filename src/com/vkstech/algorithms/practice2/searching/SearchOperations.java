@@ -133,6 +133,30 @@ public class SearchOperations {
         }
     }
 
+    private static int findMissingInAP(int[] arr) {
+        int n = arr.length;
+        int diff = (arr[n - 1] - arr[0]) / n;
+        return findMissingUtil(arr, 0, n - 1, diff);
+    }
+
+    private static int findMissingUtil(int[] arr, int low, int high, int diff) {
+        if (high <= low)
+            return Integer.MAX_VALUE;
+
+        int mid = low + (high - low) / 2;
+
+        if (arr[mid + 1] - arr[mid] != diff)
+            return (arr[mid] + diff);
+
+        if (mid > 0 && arr[mid] - arr[mid - 1] != diff)
+            return (arr[mid - 1] + diff);
+
+        if (arr[mid] == arr[0] + mid * diff)
+            return findMissingUtil(arr, mid + 1, high, diff);
+
+        return findMissingUtil(arr, low, mid - 1, diff);
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -151,5 +175,8 @@ public class SearchOperations {
         int[] arr5 = {5, 6, 7, 8, 9, 10, 1, 2, 3};
         int k1 = 10;
         System.out.println(searchRotated(arr5, k1, 0, arr5.length - 1));
+
+        int[] arr6 = {2, 4, 8, 10, 12, 14};
+        System.out.println(findMissingInAP(arr6));
     }
 }
