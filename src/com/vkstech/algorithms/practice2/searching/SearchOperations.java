@@ -109,6 +109,30 @@ public class SearchOperations {
             return searchLastOcc(arr, k, mid + 1, end);
     }
 
+    public static int searchRotated(int[] arr, int k, int left, int right) {
+        if (left > right)
+            return -1;
+
+        int mid = left + ((right - left) / 2);
+
+        if (arr[mid] == k)
+            return mid;
+
+        if (arr[left] <= arr[mid]) {
+            if (k >= arr[left] && k < arr[mid]) {
+                return searchRotated(arr, k, left, mid - 1);
+            } else {
+                return searchRotated(arr, k, mid + 1, right);
+            }
+        } else {
+            if (k > arr[mid] && k <= arr[right]) {
+                return searchRotated(arr, k, mid + 1, right);
+            } else {
+                return searchRotated(arr, k, left, mid - 1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -123,5 +147,9 @@ public class SearchOperations {
         int[] arr4 = {1, 1, 2, 2, 2, 2, 3};
         int x2 = 2;
         System.out.println(countOccurrence(arr4, x2));
+
+        int[] arr5 = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+        int k1 = 10;
+        System.out.println(searchRotated(arr5, k1, 0, arr5.length - 1));
     }
 }
