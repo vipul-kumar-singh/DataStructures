@@ -157,6 +157,26 @@ public class SearchOperations {
         return findMissingUtil(arr, low, mid - 1, diff);
     }
 
+    public static int floorSqrt(int k) {
+        if (k == 0 || k == 1)
+            return k;
+
+        long start = 1, end = k / 2, ans = 0;
+        while (start <= end) {
+            long mid = (start + end) / 2;
+
+            if (mid * mid == k)
+                return (int) mid;
+
+            if (mid * mid < k) {
+                start = mid + 1;
+                ans = mid;
+            } else
+                end = mid - 1;
+        }
+        return (int) ans;
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -178,5 +198,7 @@ public class SearchOperations {
 
         int[] arr6 = {2, 4, 8, 10, 12, 14};
         System.out.println(findMissingInAP(arr6));
+
+        System.out.println(floorSqrt(11));
     }
 }
