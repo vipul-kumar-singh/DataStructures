@@ -177,6 +177,25 @@ public class SearchOperations {
         return (int) ans;
     }
 
+    public static int findTransitionPoint(int[] arr) {
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (arr[mid] == 0)
+                low = mid + 1;
+
+            else if (arr[mid] == 1) {
+                if (mid == 0 || arr[mid - 1] == 0)
+                    return mid;
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -200,5 +219,8 @@ public class SearchOperations {
         System.out.println(findMissingInAP(arr6));
 
         System.out.println(floorSqrt(11));
+
+        int[] arr7 = {0, 0, 0, 0, 1, 1, 1, 1};
+        System.out.println(findTransitionPoint(arr7));
     }
 }
