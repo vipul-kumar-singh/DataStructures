@@ -224,6 +224,53 @@ public class SearchOperations {
             return findPeakElement(arr, (mid + 1), high);
     }
 
+    public static int findMinPages(int[] arr, int m) {
+        int sum = 0;
+        int n = arr.length;
+
+        if (n < m)
+            return -1;
+
+        int mx = arr[0];
+
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            mx = Math.max(arr[i], mx);
+        }
+
+        int start = arr[n - 1], end = sum;
+        int result = Integer.MAX_VALUE;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (isPossible(arr, n, m, mid)) {
+                result = mid;
+                end = mid - 1;
+            } else
+                start = mid + 1;
+        }
+
+        return result;
+    }
+
+    private static boolean isPossible(int[] arr, int n, int m, int curr_min) {
+        int studentsRequired = 1;
+        int curr_sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            curr_sum += arr[i];
+
+            if (curr_sum > curr_min) {
+                studentsRequired++;
+                curr_sum = arr[i];
+            }
+        }
+
+        return studentsRequired <= m;
+    }
+
+
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
         System.out.println(countBuildingsFacingTheSun(arr1));
@@ -256,5 +303,9 @@ public class SearchOperations {
 
         int[] arr9 = {1, 3, 20, 4, 1, 0};
         System.out.println(findPeakElement(arr9, 0, arr9.length - 1));
+
+        int[] arr10 = {12, 34, 67, 90};
+        int m = 2;
+        System.out.println(findMinPages(arr10, m));
     }
 }
