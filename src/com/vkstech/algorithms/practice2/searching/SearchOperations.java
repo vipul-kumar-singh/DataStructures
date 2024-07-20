@@ -270,6 +270,25 @@ public class SearchOperations {
         return studentsRequired <= m;
     }
 
+    public static int firstMissingPositive(int[] arr) {
+        int n = arr.length;
+
+        for (int num : arr) {
+
+            while (num >= 1 && num <= n && num != arr[num - 1]) {
+                int temp = arr[num - 1];
+                arr[num - 1] = num;
+                num = temp;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != i + 1)
+                return (i + 1);
+        }
+
+        return (n + 1);
+    }
 
     public static void main(String[] args) {
         int[] arr1 = {7, 4, 8, 2, 9};
@@ -307,5 +326,8 @@ public class SearchOperations {
         int[] arr10 = {12, 34, 67, 90};
         int m = 2;
         System.out.println(findMinPages(arr10, m));
+
+        int[] arr11 = {0, 10, 2, -10, -20};
+        System.out.println(firstMissingPositive(arr11));
     }
 }
