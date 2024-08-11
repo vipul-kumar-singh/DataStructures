@@ -1,4 +1,4 @@
-package com.vkstech.algorithms.practice.interview;
+package com.vkstech.algorithms.practice2.interview;
 
 public final class ImmutableClass {
 
