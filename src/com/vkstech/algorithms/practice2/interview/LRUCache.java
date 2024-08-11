@@ -1,4 +1,4 @@
-package com.vkstech.algorithms.practice.interview;
+package com.vkstech.algorithms.practice2.interview;
 
 import java.util.Deque;
 import java.util.HashMap;
