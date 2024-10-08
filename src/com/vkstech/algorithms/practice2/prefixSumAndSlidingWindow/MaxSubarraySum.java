@@ -17,6 +17,39 @@ public class MaxSubarraySum {
         return result;
     }
 
+    private static int getMaxSubarraySum1(int[] arr) {
+
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            int prefixSum = 0;
+            for (int j = i; j < arr.length; j++) {
+                prefixSum = prefixSum + arr[j];
+                maxSum = Math.max(prefixSum, maxSum);
+            }
+        }
+        return maxSum;
+    }
+
+    public static int getMaxSubarraySum2(int[] arr) {
+        int sum = 0;
+        int maxSum = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+
+            if (sum < 0) {
+                if (arr[i] >= sum) {
+                    sum = arr[i];
+                } else {
+                    sum = 0;
+                }
+            }
+
+            maxSum = Math.max(sum, maxSum);
+        }
+        return maxSum;
+    }
+
     public static void main(String[] args) {
         int[] arr1 = {1, 2, 3, -2, 5};
         System.out.println(getMaxSubarraySum(arr1));
