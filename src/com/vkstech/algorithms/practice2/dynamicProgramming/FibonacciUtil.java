@@ -28,6 +28,7 @@ public class FibonacciUtil {
         return result;
     }
 
+    // top down approach
     public int getFibonacci(int n) {
         if (arr[n] != -1)
             return arr[n];
@@ -36,9 +37,26 @@ public class FibonacciUtil {
         return arr[n];
     }
 
+    // Bottom up approach
+    public int getFibonacci2(int n) {
+        if (n <= 1)
+            return n;
+
+        int[] fibArr = new int[n + 1];
+        fibArr[0] = 0;
+        fibArr[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            fibArr[i] = fibArr[i - 1] + fibArr[i - 2];
+        }
+
+        return fibArr[n];
+    }
+
     public static void main(String[] args) {
         FibonacciUtil fibonacciUtil = new FibonacciUtil();
         System.out.println(fibonacciUtil.fibonacci(10));
         System.out.println(fibonacciUtil.getFibonacci(10));
+        System.out.println(fibonacciUtil.getFibonacci2(10));
     }
 }
