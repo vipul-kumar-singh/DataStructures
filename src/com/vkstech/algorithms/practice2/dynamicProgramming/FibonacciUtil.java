@@ -53,10 +53,29 @@ public class FibonacciUtil {
         return fibArr[n];
     }
 
+    // Reducing Space complexity
+    public int getFibonacci3(int n) {
+        if (n <= 1)
+            return n;
+
+        int first = 0;
+        int second = 1;
+        int result = 0;
+
+        for (int i = 2; i <= n; i++) {
+            result = first + second;
+            first = second;
+            second = result;
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
         FibonacciUtil fibonacciUtil = new FibonacciUtil();
         System.out.println(fibonacciUtil.fibonacci(10));
         System.out.println(fibonacciUtil.getFibonacci(10));
         System.out.println(fibonacciUtil.getFibonacci2(10));
+        System.out.println(fibonacciUtil.getFibonacci3(10));
     }
 }
