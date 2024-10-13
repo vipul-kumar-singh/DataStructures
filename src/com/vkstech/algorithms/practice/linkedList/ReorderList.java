@@ -14,7 +14,7 @@ public class ReorderList {
 
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
-        for (int i = 1; i <= 1; i++)
+        for (int i = 1; i <= 9; i++)
             linkedList.insert(i);
 
         reorder(linkedList);
