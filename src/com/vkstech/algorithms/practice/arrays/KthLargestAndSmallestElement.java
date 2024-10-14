@@ -41,6 +41,6 @@ public class KthLargestAndSmallestElement {
     public static void main(String[] args) {
         int[] input = {7, 10, 4, 3, 20, 15}; // 3,4,7,10,15,20
         System.out.println(getKthSmallestElement(input, 3));
-        System.out.println(getKthLargestElement(input, 10));
+        System.out.println(getKthLargestElement(input, 3));
     }
 }
