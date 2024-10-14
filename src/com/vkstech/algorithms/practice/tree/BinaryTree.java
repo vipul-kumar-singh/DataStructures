@@ -2,12 +2,12 @@ package com.vkstech.algorithms.practice.tree;
 
 public class BinaryTree {
 
-    Node root;
+    public Node root;
 
     public static class Node {
-        int data;
-        Node left;
-        Node right;
+        public int data;
+        public Node left;
+        public Node right;
 
         public Node(int data) {
             this.data = data;
