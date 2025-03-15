@@ -1,6 +1,6 @@
 <Modal
   visible={isEthnicityModalVisible}
-  transparent={false} // Change to false to cover full screen
+  transparent={true}
   animationType="slide"
   onRequestClose={closeEthnicityModal}
 >
@@ -14,8 +14,10 @@
         <Text style={styles.modalTitle}>Ethnicity</Text>
       </View>
 
-      {/* Select One Text */}
-      <Text style={styles.modalText}>Select one:</Text>
+      {/* Select One Text with Bottom Line */}
+      <View style={styles.modalTextContainer}>
+        <Text style={styles.modalText}>Select one:</Text>
+      </View>
 
       {/* Ethnicity Options */}
       {['Hispanic or Latino', 'Not Hispanic or Latino', 'Unknown', 'Prefer not to answer'].map((option) => (
@@ -36,26 +38,25 @@
 </Modal>
 
 
-
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dimmed background
-    justifyContent: 'center',
+    justifyContent: 'flex-end', // Align modal to bottom with space on top
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dim background
   },
   modalContent: {
-    flex: 1, // Take full height
     width: '100%',
+    height: '90%', // Make it 90% of screen height
     padding: 20,
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    elevation: 5,
   },
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
-    marginTop: 10,
   },
   closeButton: {
     fontSize: 22,
@@ -67,10 +68,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  modalTextContainer: {
+    paddingBottom: 10,
+    borderBottomWidth: 1, // Bottom border added
+    borderBottomColor: '#ccc',
+    marginBottom: 10, // Space below the line
+  },
   modalText: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 15,
   },
   optionContainer: {
     flexDirection: 'row',
