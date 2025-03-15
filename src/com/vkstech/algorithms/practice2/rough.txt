@@ -1,41 +1,7 @@
-<Modal
-  visible={isEthnicityModalVisible}
-  transparent={true}
-  animationType="slide"
-  onRequestClose={closeEthnicityModal}
->
-  <View style={styles.modalContainer}>
-    <View style={styles.modalContent}>
-      {/* Modal Header with Close Button on Left */}
-      <View style={styles.modalHeader}>
-        <TouchableOpacity onPress={closeEthnicityModal}>
-          <Text style={styles.closeButton}>✕</Text>
-        </TouchableOpacity>
-        <Text style={styles.modalTitle}>Ethnicity</Text>
-      </View>
-
-      {/* Select One Text with Bottom Line */}
-      <View style={styles.modalTextContainer}>
-        <Text style={styles.modalText}>Select one:</Text>
-      </View>
-
-      {/* Ethnicity Options */}
-      {['Hispanic or Latino', 'Not Hispanic or Latino', 'Unknown', 'Prefer not to answer'].map((option) => (
-        <TouchableOpacity key={option} onPress={() => handleEthnicitySelect(option)} style={styles.optionContainer}>
-          <Text style={styles.radioText}>{option}</Text>
-          <View style={styles.radioCircle}>
-            {selectedEthnicity === option && <View style={styles.selectedRb} />}
-          </View>
-        </TouchableOpacity>
-      ))}
-
-      {/* Bottom Button */}
-      <TouchableOpacity onPress={handleSelect} style={styles.bottomButton}>
-        <Text style={styles.bottomButtonText}>Label</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
+{/* Label button at the bottom */}
+<TouchableOpacity onPress={handleSelect} style={styles.bottomButton}>
+  <Text style={styles.bottomButtonText}>Label</Text>
+</TouchableOpacity>
 
 
 const styles = StyleSheet.create({
@@ -46,72 +12,23 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
-    height: '90%', // Make it 90% of screen height
-    padding: 20,
+    height: '90%', // 90% of the screen height
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    elevation: 5,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  closeButton: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#196ECF',
-    marginRight: 15,
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  modalTextContainer: {
-    paddingBottom: 10,
-    borderBottomWidth: 1, // Bottom border added
-    borderBottomColor: '#ccc',
-    marginBottom: 10, // Space below the line
-  },
-  modalText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  optionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  radioCircle: {
-    height: 20,
-    width: 20,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#196ECF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  selectedRb: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#196ECF',
-  },
-  radioText: {
-    fontSize: 16,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    position: 'relative', // Needed for absolute positioning
   },
   bottomButton: {
+    position: 'absolute',
+    bottom: 20, // Stick to bottom with some padding
+    left: '5%',
     width: '90%',
     backgroundColor: '#0B1F35',
     paddingVertical: 12,
     borderRadius: 25,
     alignItems: 'center',
-    alignSelf: 'center',
-    marginVertical: 20,
   },
   bottomButtonText: {
     color: 'white',
