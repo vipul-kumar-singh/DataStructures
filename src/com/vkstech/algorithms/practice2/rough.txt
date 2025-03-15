@@ -1,6 +1,6 @@
 <Modal
   visible={isEthnicityModalVisible}
-  transparent={true}
+  transparent={false} // Change to false to cover full screen
   animationType="slide"
   onRequestClose={closeEthnicityModal}
 >
@@ -37,33 +37,31 @@
 
 
 
-
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dimmed background
+    justifyContent: 'center',
   },
   modalContent: {
+    flex: 1, // Take full height
     width: '100%',
     padding: 20,
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    alignItems: 'flex-start',
-    elevation: 5,
   },
   modalHeader: {
-    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    marginTop: 10,
   },
   closeButton: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#196ECF',
-    marginRight: 15, // Ensures proper spacing
+    marginRight: 15,
   },
   modalTitle: {
     fontSize: 18,
