@@ -6,7 +6,18 @@
 >
   <View style={styles.modalContainer}>
     <View style={styles.modalContent}>
+      {/* Modal Header with Close Button on Left */}
+      <View style={styles.modalHeader}>
+        <TouchableOpacity onPress={closeEthnicityModal}>
+          <Text style={styles.closeButton}>✕</Text>
+        </TouchableOpacity>
+        <Text style={styles.modalTitle}>Ethnicity</Text>
+      </View>
+
+      {/* Select One Text */}
       <Text style={styles.modalText}>Select one:</Text>
+
+      {/* Ethnicity Options */}
       {['Hispanic or Latino', 'Not Hispanic or Latino', 'Unknown', 'Prefer not to answer'].map((option) => (
         <TouchableOpacity key={option} onPress={() => handleEthnicitySelect(option)} style={styles.optionContainer}>
           <Text style={styles.radioText}>{option}</Text>
@@ -15,6 +26,8 @@
           </View>
         </TouchableOpacity>
       ))}
+
+      {/* Bottom Button */}
       <TouchableOpacity onPress={handleSelect} style={styles.bottomButton}>
         <Text style={styles.bottomButtonText}>Label</Text>
       </TouchableOpacity>
@@ -25,12 +38,11 @@
 
 
 
-
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: 'flex-end', 
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
     width: '100%',
@@ -41,10 +53,26 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     elevation: 5,
   },
-  modalText: {
+  modalHeader: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  closeButton: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#196ECF',
+    marginRight: 15, // Ensures proper spacing
+  },
+  modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 20,
+  },
+  modalText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 15,
   },
   optionContainer: {
     flexDirection: 'row',
