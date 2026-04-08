@@ -1,6 +1,5 @@
 package com.vkstech.algorithms.practice3.string;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,11 +19,11 @@ public class FirstRepeatingAndNonRepeatingChar {
     private static Character firstNonRepeatingChar(String str) {
         int[] ascii = new int[256];
 
-        for(char ch : str.toCharArray()){
+        for (char ch : str.toCharArray()) {
             ascii[ch]++;
         }
 
-        for(char ch : str.toCharArray()){
+        for (char ch : str.toCharArray()) {
             if (ascii[ch] == 1)
                 return ch;
         }

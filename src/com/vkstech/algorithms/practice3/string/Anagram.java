@@ -1,7 +1,5 @@
 package com.vkstech.algorithms.practice3.string;
 
-import java.util.Arrays;
-
 public class Anagram {
 
     private static boolean isAnagram(String s1, String s2) {
@@ -11,11 +9,11 @@ public class Anagram {
         int[] ascii = new int[256];
 
         for (int i = 0; i < s1.length(); i++) {
-                ascii[s1.charAt(i)]++;
-                ascii[s2.charAt(i)]--;
+            ascii[s1.charAt(i)]++;
+            ascii[s2.charAt(i)]--;
         }
 
-        for(int i : ascii){
+        for (int i : ascii) {
             if (i != 0)
                 return false;
         }

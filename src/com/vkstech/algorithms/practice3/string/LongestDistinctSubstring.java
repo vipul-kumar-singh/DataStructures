@@ -21,8 +21,8 @@ public class LongestDistinctSubstring {
         int maxCount = 0;
         Set<Character> charSet = new HashSet<>();
 
-        for(char ch : str.toCharArray()) {
-            if (!charSet.contains(ch)){
+        for (char ch : str.toCharArray()) {
+            if (!charSet.contains(ch)) {
                 count++;
             } else {
                 maxCount = Math.max(count, maxCount);
